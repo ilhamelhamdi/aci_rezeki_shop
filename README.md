@@ -1,6 +1,6 @@
 # Tugas 2
 
-Web application : [Aci Rezeki Shop] (https://aci-rezeki-shop.adaptable.app/main/)
+Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
 
 ## Daftar Isi
 
