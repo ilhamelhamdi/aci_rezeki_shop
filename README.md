@@ -43,7 +43,7 @@ Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
 
 ## Cara Kerja Implementasi Konsep MTV pada Django
 
-![Diagram Konsep MVT pada Django](.img/diagram_django_flow.jpg)
+![Diagram Konsep MVT pada Django](img/diagram_django_flow.jpg)
 
 1. User melakukan request HTTP ke aplikasi Django melalui browser atau aplikasi lainnya. Framework Django akan melihat URL yang diakses oleh user dan mencocokkannya dengan URL yang terdaftar pada `urls.py`.
 2. `urls.py` akan meneruskan request ke `views.py` yang sesuai dengan URL yang diakses oleh user.
