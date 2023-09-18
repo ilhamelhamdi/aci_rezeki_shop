@@ -4,12 +4,41 @@ Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
 
 ## Daftar Isi
 
--   [Implementasi Step-by-Step](#implementasi-step-by-step)
--   [Cara Kerja Implementasi Konsep MTV pada Django](#cara-kerja-implementasi-konsep-mtv-pada-django)
--   [Alasan Penggunaan Virtual Environment](#alasan-penggunaan-virtual-environment)
--   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
+-   Tugas 3
 
-## Implementasi Step-by-Step
+-   Tugas 2
+    -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-2)
+    -   [Cara Kerja Implementasi Konsep MTV pada Django](#cara-kerja-implementasi-konsep-mtv-pada-django)
+    -   [Alasan Penggunaan Virtual Environment](#alasan-penggunaan-virtual-environment)
+    -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
+
+<!-- ================ TUGAS 3 BEGIN ================== -->
+<details>
+<summary><h1>Tugas 3</h1></summary>
+
+## Perbedaan Form POST dan Form GET
+
+POST dan GET, keduanya merupakan bagian dari HTTP request method. Dalam Django, hanya kedua method tersebut yang dapat digunakan saat menggunakan form. Keduanya sama-sama digunakan dalam _data delivery_. Namun, perbedaannya terdapat pada cara bagaimana data tersebut disampaikan. Method POST mengirimkan data melalui _body_ HTTP request yang mana telah melalui _encoding_ terlebih dahulu. Sedangkan, method GET mengirimkan data melalui string URL tanpa melalui proses _encoding_. Tentunya hal ini menunjukkan keduanya memiliki fungsi yang berbeda. Pengiriman data melalui method POST dinilai lebih aman karena data tidak terekspos secara langsung dan telah melalui proses _encoding_ terlebih dahulu. Biasanya form POST digunakan untuk mengirimkan _request_ yang bersifat _state changing_ seperti mengubah atau menambahkan data ke database. Adapun form GET biasa digunakan untuk mengirimkan _request_ yang bersifat _state retrieving_ seperti mengambil data dari database.
+
+Referensi: [https://docs.djangoproject.com/en/4.2/topics/forms/#get-and-post](https://docs.djangoproject.com/en/4.2/topics/forms/#get-and-post)
+
+## Perbedaan XML, JSON, dan HTML dalam _Data Delivery_
+XML (eXtensible Markup Language) merupakan salah satu format dalam pengiriman data. Data yang diformat dalam XML akan memiliki struktur seperti berikut `<tag>content</tag>` yang mana `tag` merupakan nama dari data dan `content` merupakan isi dari data tersebut. XML dapat digunakan untuk mengirimkan data yang memiliki struktur yang kompleks, seperti data yang memiliki hierarki.
+
+JSON (JavaScript Object Notation) merupakan salah satu format dalam pengiriman data. Data yang diformat dalam JSON akan memiliki struktur seperti berikut `{ "key": "value" }` yang mana `key` merupakan nama dari data dan `value` merupakan isi dari data tersebut. Seperti namanya, JSON terinspirasi/dibuat berdasarkan notasi/format objek dari bahasa JavaScript.
+
+## Alasan JSON Lebih Populer Digunakan dalam _Data Delivery_
+
+## Implementasi Step-by-Step (Tugas 3)
+
+</details>
+<!-- ================ TUGAS 3 END ================== -->
+
+<!-- ================ TUGAS 2 BEGIN ================== -->
+<details>
+<summary><h1>Tugas 2</h1></summary>
+
+## Implementasi Step-by-Step (Tugas 2)
 
 -   Membuat repository baru di github
 -   Membuat folder baru di local dan menghubungkan dengan repository yang sudah dibuat
@@ -92,5 +121,8 @@ MVVM merupakan konsep arsitektur perangkat lunak yang memisahkan aplikasi menjad
 
 -   Masing-masing arsitektur memiliki _entry point_ yang berbeda untuk berinteraksi dengan user. Pada MVC, _entry point_-nya adalah controller. Pada MVT Django, _entry point_-nya adalah aplikasi Django itu sendiri kemudian di-forward ke layer view. Sedangkan pada MVVM, _entry point_-nya adalah layer view.
 -   Arsitektur MVVM cocok digunakan dalam implementasi aplikasi berbasis UI atau frontend, terutama aplikasi mobile dan desktop. Sedangkan arsitektur MVC dan MVT lebih populer diguanaan dalam implementasi aplikasi server-side, seperti aplikasi web.
-- Peran layer view pada MVT lebih mirip seperti layer controller pada arsitektur MVC, yaitu sebagai pengatur _flow_ dari aplikasi.
-- Peran layer template pada MVT lebih mirip dengan layer view pada arsitektur MVC, yaitu sebagai layer yang bertanggung jawab untuk menampilkan data kepada user.
+-   Peran layer view pada MVT lebih mirip seperti layer controller pada arsitektur MVC, yaitu sebagai pengatur _flow_ dari aplikasi.
+-   Peran layer template pada MVT lebih mirip dengan layer view pada arsitektur MVC, yaitu sebagai layer yang bertanggung jawab untuk menampilkan data kepada user.
+
+</details>
+<!-- ================ TUGAS 2 END ================== -->
