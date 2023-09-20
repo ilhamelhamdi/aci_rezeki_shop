@@ -1,6 +1,6 @@
 #add-item-wrapper {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
 }
 
 .item-card-wrapper {
