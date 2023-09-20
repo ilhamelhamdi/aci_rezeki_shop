@@ -173,7 +173,7 @@ JSON lebih populer digunakan sebagai format _data delivery_ pada aplikasi web mo
 
 ## Bonus (Tugas 3)
 
-Menambahkan pesan "Kamu menyimpan X item pada aplikasi ini" (dengan X adalah jumlah data item yang tersimpan pada aplikasi) dan menampilkannya di atas tabel data.
+Menambahkan pesan "Jumlah item tersedia: X" (dengan X adalah jumlah data item yang tersimpan pada aplikasi) dan menampilkannya di atas tabel data.
 ![Bonus Assignment 3](img/bonus-assignment-3.png)
 
 </details>
