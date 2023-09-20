@@ -1,6 +1,6 @@
 # Tugas PBP : Aci Rezeki Shop
 
-Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
+Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-shop.ilhamelhamdi.com)
 
 ## Daftar Isi
 
