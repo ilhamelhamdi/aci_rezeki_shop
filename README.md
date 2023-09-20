@@ -5,7 +5,12 @@ Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
 ## Daftar Isi
 
 -   Tugas 3
-
+    -   [Perbedaan Form POST dan Form GET](#perbedaan-form-post-dan-form-get)
+    -   [Perbedaan XML, JSON, dan HTML dalam _Data Delivery_](#perbedaan-xml-json-dan-html-dalam-data-delivery)
+    -   [Alasan JSON Lebih Populer Digunakan dalam _Data Delivery_](#alasan-json-lebih-populer-digunakan-dalam-data-delivery)
+    -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-3)
+    -   [Screenshot Postman](#screenshot-postman)
+    -   [Bonus](#bonus-tugas-3)
 -   Tugas 2
     -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-2)
     -   [Cara Kerja Implementasi Konsep MTV pada Django](#cara-kerja-implementasi-konsep-mtv-pada-django)
@@ -23,28 +28,30 @@ POST dan GET, keduanya merupakan bagian dari HTTP request method. Dalam Django, 
 Referensi: [https://docs.djangoproject.com/en/4.2/topics/forms/#get-and-post](https://docs.djangoproject.com/en/4.2/topics/forms/#get-and-post)
 
 ## Perbedaan XML, JSON, dan HTML dalam _Data Delivery_
+
 XML (eXtensible Markup Language) merupakan salah satu format dalam pengiriman data. Data yang diformat dalam XML akan memiliki struktur seperti berikut: `<tag>content</tag>`. Bagian `tag` merupakan nama dari data dan `content` merupakan isi dari data tersebut. Setiap `<tag>` perlu ditutup oleh tag penutupnya (`</tag>`). XML dapat digunakan untuk mengirimkan data yang memiliki struktur yang kompleks, seperti data yang memiliki hierarki. Tag XML dapat ditentukan sendiri oleh pengguna sesuai dengan kebutuhan.
 
 JSON (JavaScript Object Notation) merupakan salah satu format dalam pengiriman data. Data yang diformat dalam JSON akan memiliki struktur key-value seperti berikut `{ "key": "value" }` yang mana `key` merupakan nama dari data dan `value` merupakan isi dari data tersebut. Seperti namanya, JSON terinspirasi/dibuat berdasarkan notasi/format objek dari bahasa pemrograman JavaScript.
 
-HTML (Hyper Text Markup Language) merupakan format dokumen yang digunakan untuk membuat halaman web. HTML adalah kombinasi dari _markup language_ dan _hypertext_. Sebagai _markup language_, HTML memiliki syntax yang sama seperti XML, yaitu  `<tag>content</tag>`. Sebagai _hypertext_, HTML memiliki kemampuan untuk membuat _link_ yang menghubungkan satu halaman dengan halaman lainnya. Tag-tag dalam HTML pada umumnya telah ditentukan sebelumnya.
+HTML (Hyper Text Markup Language) merupakan format dokumen yang digunakan untuk membuat halaman web. HTML adalah kombinasi dari _markup language_ dan _hypertext_. Sebagai _markup language_, HTML memiliki syntax yang sama seperti XML, yaitu `<tag>content</tag>`. Sebagai _hypertext_, HTML memiliki kemampuan untuk membuat _link_ yang menghubungkan satu halaman dengan halaman lainnya. Tag-tag dalam HTML pada umumnya telah ditentukan sebelumnya.
 
-Dalam konteks pengiriman data, XML dan JSON memiliki fungsi yang sama, yaitu sebagai *format/struktur untuk menyimpan atau melakukan transfer data*. Sedangkan HTML berfungsi sebagai *reperesentasi bagaimana data ditampilkan* kepada user. 
+Dalam konteks pengiriman data, XML dan JSON memiliki fungsi yang sama, yaitu sebagai _format/struktur untuk menyimpan atau melakukan transfer data_. Sedangkan HTML berfungsi sebagai _reperesentasi bagaimana data ditampilkan_ kepada user.
 
-Adapun perbedaan antara JSON dan XML terletak pada format penulisannya. JSON menggunakan format key-value, seperti pada struktur data Map. Sedangkan XML yang merupakan _markup language_ menggunakan format tag. 
+Adapun perbedaan antara JSON dan XML terletak pada format penulisannya. JSON menggunakan format key-value, seperti pada struktur data Map. Sedangkan XML yang merupakan _markup language_ menggunakan format tag.
 
-Referensi: 
-    - [https://www.geeksforgeeks.org/html-vs-xml/](https://www.geeksforgeeks.org/html-vs-xml/)
-    - [https://aws.amazon.com/compare/the-difference-between-json-xml/](https://aws.amazon.com/compare/the-difference-between-json-xml/)
+Referensi: - [https://www.geeksforgeeks.org/html-vs-xml/](https://www.geeksforgeeks.org/html-vs-xml/) - [https://aws.amazon.com/compare/the-difference-between-json-xml/](https://aws.amazon.com/compare/the-difference-between-json-xml/)
 
 ## Alasan JSON Lebih Populer Digunakan dalam _Data Delivery_
-JSON lebih populer digunakan sebagai format _data delivery_ pada aplikasi web modern dibandingkan dengan XML. Hal ini karena bahasa pemrograman Javascript banyak digunakan di berbagai aplikasi web modern. Kepopuleran Javascript ini berdampak pada kepopuleran JSON karena format JSON telah di-support langsung oleh Javascript. Berbeda dengan XML yang tidak di-support langsung oleh Javascript sehingga membutuhkan proses _parsing_ terlebih dahulu sebelum dapat digunakan. Selain itu, JSON memiliki format yang *lebih ringkas* dibandingkan dengan XML sehingga lebih mudah dibaca dan ditulis oleh manusia serta dapat mengurangi ukuran data dan mempercepat proses transfer data.
 
+JSON lebih populer digunakan sebagai format _data delivery_ pada aplikasi web modern dibandingkan dengan XML. Hal ini karena bahasa pemrograman Javascript banyak digunakan di berbagai aplikasi web modern. Kepopuleran Javascript ini berdampak pada kepopuleran JSON karena format JSON telah di-support langsung oleh Javascript. Berbeda dengan XML yang tidak di-support langsung oleh Javascript sehingga membutuhkan proses _parsing_ terlebih dahulu sebelum dapat digunakan. Selain itu, JSON memiliki format yang _lebih ringkas_ dibandingkan dengan XML sehingga lebih mudah dibaca dan ditulis oleh manusia serta dapat mengurangi ukuran data sehingga dapat mempercepat proses transfer data.
 
 ## Implementasi Step-by-Step (Tugas 3)
 
--   Membuat input form untuk menambahkan objek model 
+-   Membuat base template `base.html` yang akan digunakan oleh template lainnya. Base template ini berfungsi untuk mengurangi redundansi kode dan menjaga konsistensi tampilan antar halaman
+-   Membuat input form untuk menambahkan objek model
+
     -   Membuat file `forms.py` di dalam folder aplikasi `main`. Pada file tersebut, saya membuat class `ItemForm` sebagai form class untuk class `Item`. Class tersebut memiliki _innerclass_ `Meta` yang berisi model yang akan digunakan dan field yang akan ditampilkan pada form. Field yang ditampilkan pada form adalah semua field pada model class `Item`, kecuali field `id`. Berikut potongan kodenya.
+
     ```python
     class ItemForm(ModelForm):
         class Meta:
@@ -52,7 +59,123 @@ JSON lebih populer digunakan sebagai format _data delivery_ pada aplikasi web mo
             fields = '__all__'
             exclude = ['id']
     ```
-    - Membuat
+
+    -   Membuat template `create_item.html` dengan menggunakan base template `base.html`. Pada template tersebut, saya menambahkan form yang telah dibuat sebelumnya. Berikut potongan kodenya pada bagian `body`.
+
+    ```html
+    <form method="POST">
+        {% csrf_token %} {{ form.as_div }}
+        <div class="submit-wrapper">
+            <input type="submit" value="SUBMIT" class="btn-primary" />
+        </div>
+    </form>
+    ```
+
+    Kode `form.as_div` berfungsi untuk menampilkan tag `div ` yang berisi`<label>` dan `<input>` untuk setiap field pada form.
+
+    -   Membuat fungsi pada `views.py` untuk menerima request GET dan request POST dari form. Untuk request POST, fungsi tersebut akan mengambil data dari form dan menyimpannya ke database. Sedangkan untuk request GET, fungsi tersebut akan mengembalikan tampilan template `create_item.html` dengan form field yang sesuai dengan `ItemForm`. Berikut potongan kodenya.
+
+    ```python
+    def create_item(request):
+    form = ItemForm(request.POST or None)
+
+    # When client hit submit -> Post
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect('/')
+
+    context = {'form': form}
+    return render(request, 'create_item.html', context)
+    ```
+
+-   Membuat fungsi pada `views.py` untuk meng-handle pengambilan data dalam format HTML, XML, JSON, XML by ID, dan JSON by ID.
+
+    -   HTML
+        ```python
+        def show_homepage(request):
+            items = Item.objects.all()
+            count = Item.objects.count()
+            context = {
+                'items': items,
+                'item_count': count
+            }
+            return render(request, "index.html", context)
+        ```
+        Kode `Item.objects.all()` berfungsi untuk mengambil semua data pada model `Item`. Adapun kode `Item.objects.count()` berfungsi untuk menghitung jumlah item yang tersimpan di database. Semua data tersebut kemudian akan dirender ke template `index.html`, lalu dikembalikan kepada user sebagai file HTML.
+    -   JSON
+        ```python
+        def show_json(request):
+            data = Item.objects.all()
+            return HttpResponse(serializers.serialize('json', data), content_type="application/json")
+        ```
+        Kode `serializers.serialize('json', data)` berfungsi untuk mengubah data menjadi format JSON. Data dalam format JSON kemudian dikembalikan kepada user melalui HttpResponse.
+    -   XML
+        ```python
+        def show_xml(request):
+            data = Item.objects.all()
+            return HttpResponse(serializers.serialize('xml', data), content_type="application/xml")
+        ```
+        Kode `serializers.serialize('xml', data)` berfungsi untuk mengubah data menjadi format XML. Data dalam format XML kemudian dikembalikan kepada user melalui HttpResponse.
+    -   JSON by ID
+        ```python
+        def show_json_by_id(request, id):
+            data = Item.objects.filter(id=id)
+            return HttpResponse(serializers.serialize('json', data), content_type="application/json")
+        ```
+        Selain `request`, fungsi ini juga akan menerima parameter `id`. Kode `Item.objects.filter(id=id)` berfungsi untuk mengambil data objek `Item` yang memiliki id yang sesuai dengan argumen yang diberikan. Data tersebut kemudian akan diubah menjadi format JSON oleh `serializers` dan dikembalikan kepada user melalui HttpResponse.
+    -   XML by ID
+        ```python
+        def show_xml_by_id(request, id):
+            data = Item.objects.filter(id=id)
+            return HttpResponse(serializers.serialize('xml', data), content_type="application/xml")
+        ```
+        Selain `request`, fungsi ini juga akan menerima parameter `id`. Kode `Item.objects.filter(id=id)` berfungsi untuk mengambil data objek `Item` yang memiliki id yang sesuai dengan argumen yang diberikan. Data tersebut kemudian akan diubah menjadi format XML oleh `serializers` dan dikembalikan kepada user melalui HttpResponse.
+
+-   Membuat routing URL untuk masing-masing fungsi views di atas
+    Dilakukan dengan cara menambahkan path pada `urls.py` di folder aplikasi `main` untuk masing-masing fungsi views
+    -   HTML
+        ```python
+        path('', show_homepage, name='show_homepage')
+        ```
+    -   JSON
+        ```python
+        path('json/', show_json, name='show_json')
+        ```
+    -   XML
+        ```python
+        path('xml/', show_xml, name='show_xml')
+        ```
+    -   JSON by ID
+        ```python
+        path('json/<int:id>/', show_json_by_id, name='show_json_by_id')
+        ```
+    -   XML by ID
+        ```python
+        path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id')
+        ```
+    -   Create Item
+        ```python
+        path('create-item/', create_item, name='create_item')
+        ```
+
+## Screenshot Postman
+
+-   GET All Items HTML (`GET /`)
+    ![Get All Items HTML](img/postman-html.png)
+-   GET All Items JSON (`GET /json/`)
+    ![Get All Items JSON](img/postman-json.png)
+-   GET All Items XML (`GET /xml/`)
+    ![Get All Items XML](img/postman-xml.png)
+-   GET Item By Id JSON (`GET /json/<int:id>`)
+    ![GET Item By Id JSON](img/postman-json-by-id.png)
+-   GET Item By Id XML (`GET /xml/<int:id>`)
+    ![GET Item By Id XML](img/postman-xml-by-id.png)
+
+## Bonus (Tugas 3)
+
+Menambahkan pesan "Kamu menyimpan X item pada aplikasi ini" (dengan X adalah jumlah data item yang tersimpan pada aplikasi) dan menampilkannya di atas tabel data.
+![Bonus Assignment 3](img/bonus-assignment-3.png)
+
 </details>
 <!-- ================ TUGAS 3 END ================== -->
 
