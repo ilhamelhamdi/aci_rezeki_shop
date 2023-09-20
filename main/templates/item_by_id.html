@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load humanize %}
 
 {% block title %}Item{% endblock title %}
 
@@ -7,14 +8,22 @@
 {% endblock meta %}
 
 {% block content %}
-<div class="image-wrapper">
-  <img src="{{data.image}}" alt="">
+<div class="content-wrapper">
+  <div class="image-wrapper">
+    <img src="{{data.image}}" alt="">
+  </div>
+  <div class="text-wrapper">
+    <h1 class="item-name">{{data.name}}</h1>
+    <span class="item-price">Rp{{data.price|intcomma}}</span>
+    <div class="item-meta">
+      <span>Category: {{data.category}}</span>
+      <span>Stock: <span style="font-weight: bold;">{{data.amount}}</span></span>
+    </div>
+    <div class="item-description">
+      <h2>Description</h2>
+      <p>{{data.description}}</p>
+    </div>
+  </div>
 </div>
-<div>
-  <p>{{data.name}}</p>
-  <div>{{data.price}}</div>
-  <div>{{data.amount}}</div>
-  <div>{{data.category}}</div>
-  <p>{{data.description}}</p>
-</div>
+
 {% endblock content %}
