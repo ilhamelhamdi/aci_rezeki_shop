@@ -1,24 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | Aci Rezeki Shop</title>
-  <link rel="stylesheet" href="../static/global.css">
-  <link rel="stylesheet" href="../static/index.css">
-</head>
+{% block meta %}
+<link rel="stylesheet" href="../static/home.css">
+{% endblock meta %}
 
-<body>
-  <header>
-    <div><a href="/main/" class="header-title gradient">Aci Rezeki Shop</a></div>
-    <div><a href="/main/shop">Shop</a></div>
-  </header>
-  <main>
-    <h1>{{author_name}}</h1>
-    <h1 class="gradient">{{class}}</h1>
-  </main>
+{% block content %}
+<div id="add-item-wrapper">
+  <p>Jumlah item tersedia: <span style="font-weight: bolder;">{{item_count}}</span></p>
+  <a href="/create-item" class="btn-primary">+ ADD ITEM</a>
+</div>
 
-</body>
+<div class="item-card-wrapper">
+  {% for item in items %}
 
-</html>
+  <a href="/item/{{item.id}}" class="item-card">
+    <img src="{{item.image}}" class="item-image"></img>
+    <div class="item-contents">
+      <p class="item-name">{{item.name}}</p>
+      <p class="item-description">{{item.description}}</p>
+      <div class="item-field">
+        <span>Price</span>
+        <span>{{item.price}}</span>
+      </div>
+      <div class="item-field">
+        <span>Stock</span>
+        <span>{{item.amount}}</span>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
+{% endblock content %}

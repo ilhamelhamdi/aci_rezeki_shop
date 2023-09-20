@@ -6,7 +6,8 @@ class Item(models.Model):
     description = models.TextField()
     id = models.AutoField(primary_key=True)
     price = models.IntegerField()
-    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True)
+    image = models.URLField(null=True, blank=True)
+    category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True, blank=True)
     
     def __str__(self):
         return f"Item - {self.id} - {self.name}"

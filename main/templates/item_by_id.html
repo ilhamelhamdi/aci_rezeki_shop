@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Item{% endblock title %}
+
+{% block meta %}
+<link rel="stylesheet" href="../../static/item_by_id.css">
+{% endblock meta %}
+
+{% block content %}
+<div class="image-wrapper">
+  <img src="{{data.image}}" alt="">
+</div>
+<div>
+  <p>{{data.name}}</p>
+  <div>{{data.price}}</div>
+  <div>{{data.amount}}</div>
+  <div>{{data.category}}</div>
+  <p>{{data.description}}</p>
+</div>
+{% endblock content %}
