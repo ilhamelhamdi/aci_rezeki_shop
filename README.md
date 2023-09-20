@@ -1,4 +1,4 @@
-# Tugas 2 PBP : Aci Rezeki Shop
+# Tugas PBP : Aci Rezeki Shop
 
 Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
 
@@ -18,7 +18,7 @@ Web application : [Aci Rezeki Shop](https://aci-rezeki-shop.adaptable.app/main/)
     -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
 
 <!-- ================ TUGAS 3 BEGIN ================== -->
-<details>
+<details open>
 <summary><h1>Tugas 3</h1></summary>
 
 ## Perbedaan Form POST dan Form GET
