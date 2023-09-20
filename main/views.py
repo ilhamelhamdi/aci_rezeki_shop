@@ -6,8 +6,10 @@ from main.forms import ItemForm, CategoryForm
 
 def show_homepage(request):
     items = Item.objects.all()
+    count = Item.objects.count()    # Jumlah item
     context = {
         'items': items,
+        'item_count': count
     }
     return render(request, "index.html", context)
 
