@@ -14,13 +14,34 @@
 <body>
   <header>
     <div><a href="/" class="header-title gradient">Aci Rezeki Shop</a></div>
-    <div><a href="/about">About</a></div>
+    <nav>
+      <a href="/about/">About</a>
+      {% if user.is_authenticated %}
+      <div class="dropdown">
+        <a href="#" class="dropbtn">Welcome {{user.username}}</a>
+        <div class="dropdown-content">
+          <a href="/logout/">Logout</a>
+        </div>
+      </div>
+      {% endif %}
+    </nav>
   </header>
   <main>
     {% block content %}
     {% endblock content %}
   </main>
 
+  {% if request.COOKIES.last_login %}
+  <span class="last-login not-selectable">Last login: {{ request.COOKIES.last_login }}</span>
+  {% endif %}
+
+  {% if messages %}
+    <div class="toast-wrapper">
+      {% for message in messages%}
+        <div class="toast toast-{{message.tags}}">{{message}}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
 </body>
 
 </html>

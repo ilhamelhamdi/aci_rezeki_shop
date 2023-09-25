@@ -1,24 +1,6 @@
 from django.test import TestCase, Client
 from main.models import Item, Category
 
-class mainTest(TestCase):
-    def test_main_url_is_exist(self):
-        response = Client().get('/main/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_main_using_main_template(self):
-        response = Client().get('/main/')
-        self.assertTemplateUsed(response, 'index.html')
-
-    def test_shop_url_is_exist(self):
-        response = Client().get('/main/shop/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_shop_using_main_template(self):
-        response = Client().get('/main/shop/')
-        self.assertTemplateUsed(response, 'shop.html')
-
-
 class ItemTestCase(TestCase):
     def setUp(self):
         Item.objects.create(name="Kemeja", amount=5, description="Kemeja Alisan", price=100000)

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block meta %}
+<link rel="stylesheet" href="{% static 'login.css' %}">
+{% endblock meta %}
+
+{% block content %}
+<section class="form-wrapper">
+  <h1 class="form-header">Login</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <!-- {% if messages %}
+    <div>
+      {% for message in messages %}
+      <p class="message-{{message.tags}}">{{message}}</p>
+      {% endfor %}
+    </div>
+    {% endif %} -->
+    <div>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="username" required>
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="password" required>
+    </div>
+    <div class="submit-wrapper">
+      <input type="submit" value="LOGIN" class="btn-primary" />
+    </div>
+  </form>
+
+  <p class="form-footer">New to Aci Rezeki Shop? <a href="/register/">Create an account</a></p>
+</section>
+{% endblock content %}

@@ -1,47 +1,4 @@
-h1 {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
-
-form {
-    width: 480px;
-    margin: 0 auto;
-}
-
-form div {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-}
-
-form label {
-  margin-bottom: 4px;
-}
-
-input,
-textarea,
-select {
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: medium;
-    font-family: sans-serif;
-    border: none;
-    outline: none;
-    background-color: rgb(240 240 243);
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-    background-color: white;
-    outline: rgb(240 240 243) solid 3px;
-}
-
-textarea {
-    height: 3rem;
-    resize: vertical;
-}
+@import "form.css";
 
 .submit-wrapper {
     display: flex;

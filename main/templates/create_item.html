@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Create Item{% endblock title %}
 
 {% block meta %}
-<link rel="stylesheet" href="../static/create_item.css">
+<link rel="stylesheet" href="{%static 'create_item.css'%}">
 {% endblock meta %}
 
 {% block content %}
-<h1>Add New Item</h1>
+<h1 class="form-header">Add New Item</h1>
 
 <form method="POST">
   {% csrf_token %}

@@ -3,7 +3,8 @@
 Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-shop.ilhamelhamdi.com)
 
 ## Daftar Isi
-
+-   Tugas 4
+    -
 -   Tugas 3
     -   [Perbedaan Form POST dan Form GET](#perbedaan-form-post-dan-form-get)
     -   [Perbedaan XML, JSON, dan HTML dalam _Data Delivery_](#perbedaan-xml-json-dan-html-dalam-data-delivery)
@@ -17,8 +18,27 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
     -   [Alasan Penggunaan Virtual Environment](#alasan-penggunaan-virtual-environment)
     -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
 
-<!-- ================ TUGAS 3 BEGIN ================== -->
+<!-- ================ TUGAS 4 END ================== -->
 <details open>
+<summary><h1>Tugas 4</h1></summary>
+
+## `UserCreationForm` Django
+
+_Class_ `UserCreationForm` merupakan salah satu _built-in class_ pada Django yang berfungsi untuk 
+
+## Perbedaan Autentikasi dan Otorisasi
+
+## _Cookies_ dalam Pengelolaan _Session_
+
+## Masalah Keamanan dan Risiko Penggunaan _Cookies_
+
+## Implementasi Step-by-Step (Tugas 4)
+
+</details>
+<!-- ================ TUGAS 4 END ================== -->
+
+<!-- ================ TUGAS 3 BEGIN ================== -->
+<details>
 <summary><h1>Tugas 3</h1></summary>
 
 ## Perbedaan Form POST dan Form GET

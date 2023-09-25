@@ -5,7 +5,7 @@ class ItemForm(ModelForm):
     class Meta:
         model = Item
         fields = '__all__'
-        exclude = ['id']
+        exclude = ['id', 'user']
 
 class CategoryForm(ModelForm):
     class Meta:
