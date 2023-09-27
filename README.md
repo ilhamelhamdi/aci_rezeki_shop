@@ -4,6 +4,7 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
 
 ## Daftar Isi
 
+-   ## Tugas 4
 -   Tugas 3
     -   [Perbedaan Form POST dan Form GET](#perbedaan-form-post-dan-form-get)
     -   [Perbedaan XML, JSON, dan HTML dalam _Data Delivery_](#perbedaan-xml-json-dan-html-dalam-data-delivery)
@@ -17,8 +18,255 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
     -   [Alasan Penggunaan Virtual Environment](#alasan-penggunaan-virtual-environment)
     -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
 
-<!-- ================ TUGAS 3 BEGIN ================== -->
+<!-- ================ TUGAS 4 END ================== -->
 <details open>
+<summary><h1>Tugas 4</h1></summary>
+
+## `UserCreationForm` Django
+
+_Class_ `UserCreationForm` merupakan salah satu _built-in class_ pada Django yang berfungsi untuk membuat form untuk pengisian data class `User` yang telah disediakan oleh Django dari Django. Form ini meneriman tiga input field, yaitu `username`, `password1`, dan `password2` (sebagai _confirmation password_). Kelebihannya menggunakan class ini adalah kemudahannya dalam membuat form user secara instans, karena telah disediakan langsung oleh Django. Hanya dengan instansiasi form tersebut, kita sudah dapat membuat form user sederhana. Namun, sayangnya apabila kita memerlukan beberapa _field_ lain yang lebih kompleks untuk class model `User`, `UserCreationForm` tidak bisa digunakan secara langsung karena tidak bisa dikustomisasi. Hal ini bisa diatasi dengan membuat form `User` baru yang meng-inherit `UserCreationForm` dan menambahkan beberapa _field_ yang dibutuhkan.
+
+Referensi : [https://docs.djangoproject.com/en/4.2/topics/auth/default/](https://docs.djangoproject.com/en/4.2/topics/auth/default/)
+
+## Perbedaan Autentikasi dan Otorisasi
+
+Autentikasi merupakan proses verifikasi identitas seseorang. Salah satu contoh autentikasi adalah proses _login_. Sedangkan otorisasi adalah proses verifikasi apakah seseorang memiliki hak akses pada suatu objek, seperti file, aplikasi, atau data tertentu. Perbedaan keduanya terletak pada hal apa yang diverifikasi. Proses autentikasi berfokus pada siapa identitas user, sedangkan otorisasi berfokus pada apa saja yang dapat dilakukan user pada suatu objek. Pada umumnya, proses autentikasi dilakukan terlebih dahulu kemudian diikuti proses otorisasi.
+
+Keduanya penting untuk diperhatikan dalam pembuatan aplikasi karena alasan keamanan. Tanpa autentikasi dan otorisasi, keamanan data sensitif milik pengguna menjadi tidak terjamin. Siapa saja dapat mengakses data sensitif tersebut. Dengan autentikasi, data tersebut dapat diasosiasikan kepada suatu identitas tertentu. Dengan otorisasi, hak akses data tersebut dapat dibatasi bagi orang-orang yang tidak berkepentingan.
+
+## _Cookies_ dalam Pengelolaan _Session_
+
+_Cookies_ merupakan file teks yang berisi suatu informasi yang dikirimkan web server ke client/browser. Umumnya, _cookies_ berfungsi sebagai kode tanda pengenal untuk _device_ client. Cookies biasanya digunakan oleh aplikasi web untuk menyimpan informasi yang dapat digunakan di masa mendatang.
+
+Secara _default_, Django menggunakan _cookies_ untuk mengelola data sesi pengguna. Apabila pengguna melakukan _login_ pada aplikasi Django (_login_ menggunakan fungsi _login_ bawaan Django ), sebuah _cookie_ disimpan di browser. _Cookie_ ini berisi session id yang merupakan kode untuk mengidentifikasi pengguna. Untuk melakukan pengaturan _cookies_ dari sisi web server, kita dapat menggunakan method `set_cookies(key, value)` pada objek `HttpResponse` yang akan dikirim ke browser. Untuk membaca _cookies_ yang diterima dari client/browser, kita dapat menggunakan `request.COOKIES.get(key)`.
+
+## Masalah Keamanan dan Risiko Penggunaan _Cookies_
+
+_Cookies_ itu sendiri secara _default_ aman. Tidak seperti kode program, _cookies_ hanyalah sebuah teks data sehingga tidak dapat melakukan aktivitas berbahaya, seperti layaknya virus, worm, atau spyware. Pada umumnya, _cookies_ juga memiliki masa kadaluarsa sehingga akan terhapus dalam jangka waktu tertentu. Bahkan secara _default_, _session cookies_ akan terhapus apabila user menutup browser.
+Namun, penggunaan _cookies_ memiliki beberapa risiko yang mesti diwaspadai. Jika tidak dikelola dengan baik, _cookies_ bisa menjadi potensi masalah keamanan. Berikut beberapa risiko penggunaan _cookies_ :
+
+1.  Pelanggaran privasi
+    Cookies dapat digunakan untuk melacak perilaku user secara online, termasuk pengunjungan situs web dan preferensi mereka. Dalam konteks ini, cookies berperan sebagai data perilaku pengguna. Biasanya cookies ini disediakan oleh pihak ketiga (selain pemilik website).
+2.  Cross-site request forgery attack (XSRF)
+    Penggunaan _cookies_ sebagai pengelola sesi pengguna juga berpotensi menimbulkan risiko serangang XSRF. _Persisten cookies_ yang berisi session id bisa saja dibaca oleh _malicious program_ dari aplikasi lain, kemudian melakukan aktivitas yang tidak diinginkan dengan _cookies_ yang telah dicuri tersebut.
+
+## Implementasi Step-by-Step (Tugas 4)
+
+-   Implementasi fungsi registrasi, login, dan logout
+
+    -   Implementasi fungsi registrasi
+
+        -   Membuat template untuk menampilkan form untuk melakukan registrasi dengan nama `register.html`
+        -   Membuat fungsi `register` pada `views.py`
+            ```python
+            def register(request):
+                form = UserCreationForm()
+                if request.method == "POST":
+                    form = UserCreationForm(request.POST)
+                    if form.is_valid():
+                        form.save() # Save user to database
+                        messages.success(request, 'Your account has been successfully created!')
+                        return redirect('main:login')
+                context = {'form': form}
+                return render(request, 'register.html', context)
+            ```
+        -   Melakukan routing untuk fungsi registrasi pada file `urls.py` untuk menampilkan views yang sesuai
+
+            ```python
+            from main.views import register
+
+            ...
+
+            urlpatterns = [
+                ...
+                path('register/', register, name='register'),
+                ...
+            ]
+            ```
+
+    -   Implementasi fungsi login
+
+        -   Membuat template untuk menampilkan form untuk melakukan login dengan nama `login.html`
+        -   Membuat fungsi `login_user` pada `views.py`
+
+            ```python
+            ...
+            from django.contrib.auth import authenticate, login
+            ...
+
+            def login_user(request):
+                if request.method == 'POST':
+                    username = request.POST.get('username')
+                    password = request.POST.get('password')
+                    user = authenticate(request, username=username, password=password)
+                    if user is not None:
+                        login(request, user)
+                        messages.success(request, 'You have successfully logged in!')
+                        response = HttpResponseRedirect(reverse("main:show_homepage"))
+                        return response
+                    else:
+                        messages.error(request, 'Username OR password is incorrect')
+                context = {}
+                return render(request, 'login.html', context)
+            ```
+
+        -   Melakukan routing untuk fungsi login pada file `urls.py` untuk menampilkan views yang sesuai
+
+            ```python
+            from main.views import login_user
+            ...
+
+            urlpatterns = [
+                ...
+                path('login/', login_user, name='login'),
+                ...
+            ]
+            ```
+
+    -   Implementasi fungsi logout
+
+        -   Membuat sebuah button tambahan di header template `base.html` yang berfungsi untuk melakukan logout
+        -   Membuat fungsi `logout_user` pada `views.py`
+
+            ```python
+            ...
+            from django.contrib.auth import logout
+            ...
+
+            def logout_user(request):
+                logout(request)
+                messages.success(request, 'You have successfully logged out!')
+                response = HttpResponseRedirect(reverse("main:login"))
+                return response
+            ```
+
+        -   Melakukan routing untuk fungsi logout pada file `urls.py` untuk menampilkan views yang sesuai
+
+            ```python
+            from main.views import login_user
+            ...
+
+            urlpatterns = [
+                ...
+                path('logout/', logout_user, name='logout'),
+                ...
+            ]
+            ```
+
+-   Membuat dua akun pengguna dengan masing-masing tiga dummy data
+
+    -   Menjalankan virual environment dengan menjalankan `./env/Scripts/Activate.ps1` pada Powershell di root directory _project_
+    -   Melakukan pembersihan database dengan menjalankan `python manage.py flush`
+    -   Menjalankan aplikasi dengan `python manage.py runserver`
+    -   Melakukan registrasi pada url `http://localhost:8000/register/` sebanyak dua kali untuk mendapatkan dua akun yang akan digunakan untuk menambahkan dummy data. Berikut merupakan data username dan password kedua user.
+        -   User 1
+            Username: userA
+            Password: userA1234567890
+        -   User 2
+            Username: userB
+            Password: userB1234567890
+    -   Untuk masing-masing akun, dilakukan login pada url `http://127.0.0.1:8000/login` dan melakukan penambahan item pada url `http://127.0.0.1:8000/create-item` sebanyak tiga kali.
+
+-   Menghubungkan model `Item` dengan `User`
+
+    -   Pada class model `Item`, tambahkan _data field_ baru dengan nama user dan tipe data `models.ForeignKey` untuk mendapatkan relasi dengan model `User` bawaan dari Django
+
+        ```py
+        from django.contrib.auth.models import User
+
+        class Item(models.Model):
+            user = models.ForeignKey(User, on_delete=models.CASCADE)
+        ```
+
+    -   Pada file `views.py`, ubah method untuk _fetch_ data item pada fungsi `show_homepage`, `show_json`, `show_xml`, `show_json_by_id`, dan `show_xml_by_id` sehingga hanya memperoleh data item yang dimiliki oleh user saja. Untuk tujuan ini, gunakan method `filter(user=request.user)`.
+        -   Fungsi `show_homepage`
+            ```py
+            def show_homepage(request):
+                items = Item.objects.filter(user=request.user)
+                ...
+            ```
+        -   Fungsi `show_json`
+            ```py
+            def show_json(request):
+                data = Item.objects.filter(user=request.user)
+                ...
+            ```
+        -   Fungsi `show_xml`
+            ```py
+            def show_xml(request):
+                data = Item.objects.filter(user=request.user)
+                ...
+            ```
+        -   Fungsi `show_json_by_id`
+            ```py
+            def show_json_by_id(request, id):
+                data = Item.objects.filter(user=request.user, id=id)
+                ...
+            ```
+        -   Fungsi `show_xml_by_id`
+            ```py
+            def show_xml_by_id(request, id):
+                data = Item.objects.filter(user=request.user, id=id)
+                ...
+            ```
+    -   Pada file `views.py`, ubah fungsi `create_item` sehingga setiap item memiliki data user yang memilikinya
+
+        ```py
+        def create_item(request):
+            form = ItemForm(request.POST or None)
+
+            # When client hit submit -> Post
+            if form.is_valid() and request.method == "POST":
+                item = form.save(commit=False)
+                item.user = request.user
+                item.save()
+                return HttpResponseRedirect('/')
+
+            context = {'form': form}
+            return render(request, 'create_item.html', context)
+        ```
+
+-   Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi
+    -   Membuat text tambahan pada template `base.py` untuk menampilkan `username` dan `last_login` dari _cookies_ yang disimpan dengan menggunakan _conditional rendering_
+    -   Menambahkan data `last_login` pada cookies di dalam fungsi `login_user` pada `views.py`
+    ```python
+           def login_user(request):
+               if request.method == 'POST':
+                   ...
+                   if user is not None:
+                       login(request, user)
+                       messages.success(request, 'You have successfully logged in!')
+                       response = HttpResponseRedirect(reverse("main:show_homepage"))
+                       response.set_cookie('last_login',str(datetime.datetime.now()))
+                       return response
+                   ...
+    ```
+    -   Menambahkan data `last_login` pada context di fungsi `show_homepage` pada file `views.py`
+    ```py
+    def show_homepage(request):
+        ...
+        context = {
+            'items': items,
+            'item_count': count,
+            'last_login': request.COOKIES.get('last_login'),
+        }
+        ...
+    ```
+    -   Pada fungsi `logout_user`, ditambahkan kode untuk menghapus _cookies_ data `last_login`
+    ```py
+    def logout_user(request):
+        logout(request)
+        messages.success(request, 'You have successfully logged out!')
+        response = HttpResponseRedirect(reverse("main:login"))
+        response.delete_cookie('last_login')
+        return response
+    ```
+
+</details>
+<!-- ================ TUGAS 4 END ================== -->
+
+<!-- ================ TUGAS 3 BEGIN ================== -->
+<details>
 <summary><h1>Tugas 3</h1></summary>
 
 ## Perbedaan Form POST dan Form GET

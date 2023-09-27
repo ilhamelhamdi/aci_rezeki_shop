@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Item(models.Model):
     name = models.CharField(max_length=255)
@@ -8,6 +9,7 @@ class Item(models.Model):
     price = models.IntegerField()
     image = models.URLField(null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.DO_NOTHING, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"Item - {self.id} - {self.name}"
