@@ -4,17 +4,19 @@
 {% block title %}Create Item{% endblock title %}
 
 {% block meta %}
-<link rel="stylesheet" href="{%static 'create_item.css'%}">
+<link rel="stylesheet" href="{%static 'css/create_item.css'%}">
 {% endblock meta %}
 
 {% block content %}
-<h1 class="form-header">Add New Item</h1>
+<section class="form-wrapper">
+  <h1 class="form-header">Add New Item</h1>
 
-<form method="POST">
-  {% csrf_token %}
-  {{ form.as_div }}
-  <div class="submit-wrapper">
-    <input type="submit" value="SUBMIT" class="btn-primary" />
-  </div>
-</form>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_div }}
+    <div class="submit-wrapper">
+      <input type="submit" value="SUBMIT" class="btn-primary" />
+    </div>
+  </form>
+</section>
 {% endblock content %}

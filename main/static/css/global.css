@@ -1,6 +1,7 @@
 :root {
     --primary-color: #3e54d3;
     --secondary-color: #4fe0b6;
+    --gray-color: rgb(100 105 131);
 }
 
 * {
@@ -21,6 +22,7 @@ header {
     padding: 0 2rem;
     position: fixed;
     width: 100%;
+    border-bottom: 1px solid #F0F3F7;
 }
 
 header nav {
@@ -31,7 +33,7 @@ header nav {
 }
 
 main {
-    padding: 4rem 2rem 0 2rem;
+    padding: 5rem 2rem 0 2rem;
     height: 100vh;
 }
 
@@ -41,7 +43,7 @@ p {
 
 a {
     text-decoration: none;
-    color: rgb(100 105 131);
+    color: var(--gray-color);
 }
 .header-title {
     font-size: 1.5rem;

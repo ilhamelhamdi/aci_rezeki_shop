@@ -1,6 +1,6 @@
 # create urls routing for the main app
 from django.urls import path
-from main.views import show_homepage, create_item, show_json, show_xml, show_json_by_id, show_xml_by_id, show_about, show_html_by_id, register, login_user, logout_user
+from main.views import show_homepage, create_item, show_json, show_xml, show_json_by_id, show_xml_by_id, show_about, show_html_by_id, register, login_user, logout_user, update_item, delete_item
 
 app_name = "main"
 
@@ -15,5 +15,7 @@ urlpatterns = [
     path('item/<int:id>/', show_html_by_id, name='show_html_by_id'),
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
-    path('logout/', logout_user, name='logout')
+    path('logout/', logout_user, name='logout'),
+    path('update-item/<int:id>/', update_item, name='update_item'),
+    path('delete-item/<int:id>/', delete_item, name='delete_item'),
 ]

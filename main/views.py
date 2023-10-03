@@ -11,6 +11,7 @@ from main.forms import ItemForm, CategoryForm
 
 import datetime
 
+
 @login_required(login_url='main:login')
 def show_homepage(request):
     items = Item.objects.filter(user=request.user)
@@ -45,16 +46,29 @@ def create_item(request):
 
 @login_required(login_url='main:login')
 def update_item(request, id):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(['POST'])
     
-    item = Item.objects.get(id=id)
-    form = ItemForm(request.POST or None, instance=item)
+    item = Item.objects.get(id=id, user=request.user)
 
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/')
+    data = request.POST.dict()
+    # item.name = data['name'] if 'name' in data else item.name
+    # item.amount = int(data['amount']) if 'amount' in data else item.amount
+    # item.name = data['name'] if 'name' in data else item.name
 
-    context = {'form': form}
-    return render(request, 'update_item.html', context)
+    # setattr(item, 'amount', '9')
+    # item.amount = '11'
+    # amount = getattr(item, 'amount')
+    print(item.amount)
+    # item.save()
+    # for x in request.POST:
+        # item[x] = request.POST[x]
+    # item.save()
+
+    return HttpResponse('OK')
+    # if form.is_valid():
+    #     form.save()
+    #     return HttpResponseRedirect(f'/item/{id}')  # reload
 
 @login_required(login_url='main:login')
 def delete_item(request, id):
