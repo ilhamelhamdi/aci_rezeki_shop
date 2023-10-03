@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "aci_rezeki_shop/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "aci_rezeki_shop/wsgi.py"
+    }
+  ]
+}
