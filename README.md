@@ -52,20 +52,35 @@ HTML5 adalah versi terbaru dari HTML. Kini, HTML5 menyediakan beberapa tag eleme
 ![HTML5 Tags](https://static.semrush.com/blog/uploads/media/cc/85/cc85d452a743e27f68d426df35e4da7d/original.png)
 
 -   `<header>`
+
     Elemen `<header>` biasanya digunakan untuk merepresentasikan _container_ konten pendahuluan atau kumpulan link navigasi.
+
 -   `<nav>`
+
     Elemen `<nav>` biasanya digunakan untuk merepresentasikan kumpulan link navigasi.
+
 -   `<main>`
+
     Elemen `<main>` biasanya digunakan untuk merepresentasikan _container_ konten utama dari sebuah dokumen.
+
 -   `<section>`
+
     Elemen `<section>` berfungsi untuk mendefinisikan bagian tertentu dari dokumen HTML. Misalnya, tag `<section>` digunakan untuk memisahkan bagian _introduction_, _contact information_, _details_, dan lain-lain. Berdasarkan dokumentasi W3C, "A section is a thematic grouping of content, typically with a heading."
+
 -   `<article>`
+    
     Elemen `<article>` biasanya berisi konten independen yang tidak memerlukan konteks lain di luar elemen tersebut.
+
 -   `<aside>`
+    
     Elemen ini biasanya ditempatkan disamping _container_ konten utama. Elemen ini biasanya berisi konten yang berhubungan dengan konten utama, namun tidak terlalu penting untuk dibaca. Misalnya, elemen ini biasanya berisi konten seperti _sidebar_, _advertisements_, _related articles_, dan lain-lain.
+
 -   `<footer>`
+    
     Elemen `<footer>` biasanya digunakan untuk merepresentasikan _container_ konten penutup, seperti informasi _copyright_, informasi kontak, link yang berkaitan, atau link untuk kembali ke atas dokumen.
+
 -   `<figure>`
+    
     Elemen `<figure>` biasanya digunakan untuk merepresentasikan konten yang berdiri sendiri, seperti gambar, ilustrasi, diagram, _code snippet_, dan lain-lain.
 
 Referensi: [https://www.w3schools.com/html/html5_semantic_elements.asp](https://www.w3schools.com/html/html5_semantic_elements.asp)
