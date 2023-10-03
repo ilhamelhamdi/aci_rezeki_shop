@@ -4,7 +4,7 @@
 {% block title %}Login{% endblock title %}
 
 {% block meta %}
-<link rel="stylesheet" href="{% static 'login.css' %}">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock meta %}
 
 {% block content %}
@@ -13,16 +13,9 @@
 
   <form method="POST">
     {% csrf_token %}
-    <!-- {% if messages %}
-    <div>
-      {% for message in messages %}
-      <p class="message-{{message.tags}}">{{message}}</p>
-      {% endfor %}
-    </div>
-    {% endif %} -->
     <div>
       <label for="username">Username</label>
-      <input type="text" id="username" name="username" autocomplete="username" required>
+      <input type="text" id="username" name="username" autocomplete="username" required autofocus>
     </div>
     <div>
       <label for="password">Password</label>

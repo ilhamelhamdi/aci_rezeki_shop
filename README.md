@@ -4,23 +4,373 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
 
 ## Daftar Isi
 
--   ## Tugas 4
--   Tugas 3
+-   [Tugas 5](#tugas-5)
+    -   [Manfaat dan Penggunaan yang Tepat dari _Element Selector_](#manfaat-dan-penggunaan-yang-tepat-dari-element-selector)
+    -   [Penjelasan HTML5 Tag](#penjelasan-html5-tag)
+    -   [Perbedaan Margin dan Padding](#perbedaan-margin-dan-padding)
+    -   [Perbedaan dan _Use Case_ Penggunaan _Framework_ CSS Bootstrap dan Tailwind](#perbedaan-dan-use-case-penggunaan-framework-css-bootstrap-dan-tailwind)
+    -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-5)
+-   [Tugas 4](#tugas-4)
+    -   [UserCreationForm Django](#usercreationform-django)
+    -   [Perbedaan Autentikasi dan Otorisasi](#perbedaan-autentikasi-dan-otorisasi)
+    -   [_Cookies_ dalam Pengelolaan _Session_](#cookies-dalam-pengelolaan-session)
+    -   [Masalah Keamanan dan Risiko Penggunaan _Cookies_](#masalah-keamanan-dan-risiko-penggunaan-cookies)
+    -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-4)
+-   [Tugas 3](#tugas-3)
     -   [Perbedaan Form POST dan Form GET](#perbedaan-form-post-dan-form-get)
     -   [Perbedaan XML, JSON, dan HTML dalam _Data Delivery_](#perbedaan-xml-json-dan-html-dalam-data-delivery)
     -   [Alasan JSON Lebih Populer Digunakan dalam _Data Delivery_](#alasan-json-lebih-populer-digunakan-dalam-data-delivery)
     -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-3)
     -   [Screenshot Postman](#screenshot-postman)
     -   [Bonus](#bonus-tugas-3)
--   Tugas 2
+-   [Tugas 2](#tugas-2)
     -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-2)
     -   [Cara Kerja Implementasi Konsep MTV pada Django](#cara-kerja-implementasi-konsep-mtv-pada-django)
     -   [Alasan Penggunaan Virtual Environment](#alasan-penggunaan-virtual-environment)
     -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
 
-<!-- ================ TUGAS 4 END ================== -->
+<!-- ================ TUGAS 5 BEGIN ================== -->
 <details open>
-<summary><h1>Tugas 4</h1></summary>
+<summary><h1 id="tugas-5">Tugas 5</h1></summary>
+
+## Manfaat dan Penggunaan yang Tepat dari _Element Selector_
+
+CSS _element selector_ atau _tag selector_ berfungsi untuk memilih semua elemen dengan jenis tag yang sama di dalam dokumen HTML, seperti `<p>` atau `<div>`. Setiap elemen dalam HTML memiliki jenis tag yang berbeda. Dengan menggunakan _element selector_, kita dapat mengatur style CSS untuk semua elemen dengan jenis tag yang sama secara bersamaan. Hal ini tentunya dapat menghemat waktu dan usaha dalam mengatur style CSS. Selain itu, _selector element_ juga dapat digunakan untuk mengatur style CSS untuk elemen yang belum memiliki _class_ atau _id_.
+
+_Element selector_ lebih baik digunakan saat kita membutuhkan kustomisasi secara universal untuk elemen-elemen dengan tag yang sama. Misalnya, kita ingin mengubah _default style_ tag `<a>` sehingga ditampilkan tanpa ada _underline_. Dengan menggunakan _element selector_, kita dapat mengubah style tag `<a>` secara universal tanpa perlu menambahkan _class_ atau _id_ pada tag `<a>` tersebut. Berikut merupakan kode CSS untuk contoh tersebut.
+
+```css
+a {
+    text-decoration: none;
+}
+```
+
+## Penjelasan HTML5 Tag
+
+HTML5 adalah versi terbaru dari HTML. Kini, HTML5 menyediakan beberapa tag elemen baru yang bersifat lebih _semantic_. Elemen _semantic_ adalah elemen yang memiliki makna yang dapat dipahami oleh browser ataupun developer. Dengan menggunakan elemen _semantic_, kita dapat membuat struktur dokumen HTML yang lebih jelas dan mudah dibaca. Berikut beberapa tag elemen baru pada HTML5 beserta penjelasannya.
+
+![HTML5 Tags](https://static.semrush.com/blog/uploads/media/cc/85/cc85d452a743e27f68d426df35e4da7d/original.png)
+
+-   `<header>`
+
+    Elemen `<header>` biasanya digunakan untuk merepresentasikan _container_ konten pendahuluan atau kumpulan link navigasi.
+
+-   `<nav>`
+
+    Elemen `<nav>` biasanya digunakan untuk merepresentasikan kumpulan link navigasi.
+
+-   `<main>`
+
+    Elemen `<main>` biasanya digunakan untuk merepresentasikan _container_ konten utama dari sebuah dokumen.
+
+-   `<section>`
+
+    Elemen `<section>` berfungsi untuk mendefinisikan bagian tertentu dari dokumen HTML. Misalnya, tag `<section>` digunakan untuk memisahkan bagian _introduction_, _contact information_, _details_, dan lain-lain. Berdasarkan dokumentasi W3C, "A section is a thematic grouping of content, typically with a heading."
+
+-   `<article>`
+    
+    Elemen `<article>` biasanya berisi konten independen yang tidak memerlukan konteks lain di luar elemen tersebut.
+
+-   `<aside>`
+    
+    Elemen ini biasanya ditempatkan disamping _container_ konten utama. Elemen ini biasanya berisi konten yang berhubungan dengan konten utama, namun tidak terlalu penting untuk dibaca. Misalnya, elemen ini biasanya berisi konten seperti _sidebar_, _advertisements_, _related articles_, dan lain-lain.
+
+-   `<footer>`
+    
+    Elemen `<footer>` biasanya digunakan untuk merepresentasikan _container_ konten penutup, seperti informasi _copyright_, informasi kontak, link yang berkaitan, atau link untuk kembali ke atas dokumen.
+
+-   `<figure>`
+    
+    Elemen `<figure>` biasanya digunakan untuk merepresentasikan konten yang berdiri sendiri, seperti gambar, ilustrasi, diagram, _code snippet_, dan lain-lain.
+
+Referensi: [https://www.w3schools.com/html/html5_semantic_elements.asp](https://www.w3schools.com/html/html5_semantic_elements.asp)
+
+## Perbedaan Margin dan Padding
+
+Margin dan padding merupakan konsep dalam CSS yang berguna untuk mengatur jarak antara elemen HTML. Margin adalah jarak antara elemen HTML dan elemen lain di sekitarnya, sedangkan padding adalah jarak antara konten elemen HTML dan batas elemen tersebut. Margin menciptakan **ruang kosong di luar elemen**, sementara padding menciptakan **ruang kosong di dalam elemen**. Berikut ilustrasi perbedaan margin dan padding.
+
+Berikut merupakan ilustrasi **margin** dan bagaimana margin berefek pada elemen di sekitarnya (misalkan margin = 10px):
+
+![Margin Structure](https://blog.hubspot.com/hs-fs/hubfs/Google%20Drive%20Integration/Update%20css%20margin%20vs%20padding-1.png?width=600&name=Update%20css%20margin%20vs%20padding-1.png)
+
+![Margin Effect](https://blog.hubspot.com/hs-fs/hubfs/Google%20Drive%20Integration/Update%20css%20margin%20vs%20padding.png?width=750&name=Update%20css%20margin%20vs%20padding.png)
+
+Berikut merupakan ilustrasi padding dan bagaimana padding berefek pada konten elemen tersebut (misalkan padding-x = 10px & padding-y = 15px):
+
+![Padding](https://blog.hubspot.com/hs-fs/hubfs/Google%20Drive%20Integration/Update%20css%20margin%20vs%20padding-4.png?width=600&name=Update%20css%20margin%20vs%20padding-4.png)
+
+
+## Perbedaan dan _Use Case_ Penggunaan _Framework_ CSS Bootstrap dan Tailwind
+
+Bootstrap dan Tailwind merupakan _framework_ CSS yang dapat digunakan untuk memberikan kemudahan dalam melakukan _styling_ web. Keduanya sama-sama menyediakan _class_ CSS yang dapat digunakan untuk mengatur tampilan web. Namun meskipun keduanya sama-sama _framework_ CSS, keduanya berbeda dari sisi cara kerja dan penggunaannya.
+
+_Framework_ Bootstrap menyediakan berbagai _pre-defined class_ dan template CSS yang siap pakai. Dengan menggunakan _class_ yang disediakan Bootstrap, tampilan website akan lebih terstruktur dan konsisten. Kita hanya perlu menambahkan _class_ CSS yang telah disediakan oleh Bootstrap ke elemen HTML yang ingin diatur tampilannya. Selain itu, _styling_ beberapa komponen yang umum digunakan dalam website juga telah disediakan oleh Bootstrap, seperti _form_, _button_, _card_, _carousel_, _modal_, _dropdown_, dll. Dengan pendekatan ini, Bootstrap dapat digunakan dengan mudah oleh pengguna yang tidak memiliki pengetahuan yang mendalam tentang CSS. Namun, Bootstrap memiliki kekurangan dalam hal _customization_. Karena Bootstrap hanya menyediakan _class_ CSS yang telah ditentukan, kita tidak dapat melakukan _customization_ yang mendalam terhadap tampilan web kita.
+
+Adapun _framework_ Tailwind CSS menggunakan pendekatan _utility-first_ untuk mendefinisikan berbagai _class_-nya. Dengan pendekatan ini, Tailwind CSS menyediakan berbagai _class_ CSS yang memiliki fungsi kecil atau sederhana yang dapat digabungkan untuk membuat _styling_ yang lebih kompleks. Selain itu, penggunaan Tailwind CSS juga membuat proses _styling_ lebih cepat karena developer dapat menerapkan _style_ secara langsung di dalam dokumen HTML, tanpa perlu bolak-balik antara dokumen HTML dan CSS. Dengan pendekatan ini, Tailwind CSS dapat digunakan untuk melakukan _customization_ yang mendalam terhadap tampilan web. Namun, Tailwind CSS memiliki kekurangan dalam hal _readability_. Karena Tailwind CSS menggunakan pendekatan _utility-first_, kode CSS yang dihasilkan akan terlihat sangat panjang dan sulit dibaca. Selain itu, Tailwind CSS juga tidak menyediakan _pre-defined CSS class_ untuk komponen-komponen umum seperti Bootstrap.
+
+_Framework_ Bootstrap lebih baik digunakan untuk membuat website yang memiliki **tampilan yang sederhana, konsisten dan tidak memerlukan _customization_ yang mendalam**. Sedangkan _framework_ Tailwind CSS lebih baik digunakan untuk membuat website yang memiliki **tampilan yang unik dan memerlukan _customization_ yang mendalam**.
+
+## Implementasi Step-by-Step (Tugas 5)
+
+-   Menambahkan konfigurasi static file pada `settings.py`
+    ```py
+    ...
+    STATIC_URL = 'static/'
+    ...
+    ```
+-   Membuat folder `static` di dalam folder aplikasi `main`
+-   Membuat folder `css` di dalam folder `static`
+-   Membuat file css untuk masing-masing halaman template
+    -   `global.css` (untuk styling global)
+    -   `login.css`
+    -   `register.css`
+    -   `index.css`
+    -   `create_item.css`
+    -   `item_by_id.css`
+    -   `form.css` (untuk styling form)
+-   Menghubungkan masing-masing file css dengan template yang sesuai dengan menggunakan tag `<link>` pada bagian `<head>` template. Berikut merupakan salah satu kodenya.
+    ```html
+    {% load static %} 
+    ...
+    {% block meta %}
+        <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    {% endblock meta %} 
+    ...
+    ```
+-   Membuat _styling_ untuk form pada `form.css` untuk mengatur tampilan form secara global agar lebih konsisten. Berikut merupakan kode CSS-nya
+    ```css
+    form {
+        width: 480px;
+        margin: 0 auto;
+    }
+
+    form div {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    form label {
+        margin-bottom: 4px;
+    }
+
+    form input,
+    form textarea,
+    form select {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: medium;
+        font-family: sans-serif;
+        border: none;
+        outline: none;
+        background-color: rgb(240 240 243);
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+        background-color: white;
+        outline: rgb(240 240 243) solid 3px;
+    }
+
+    form textarea {
+        height: 3rem;
+        resize: vertical;
+    }
+
+    .form-header {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    .form-footer {
+        text-align: center;
+    }
+
+    .form-wrapper {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        width: fit-content;
+        padding: 2rem 4rem;
+        margin: auto auto;
+        border-radius: 2rem;
+        min-height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    ```
+-   Kustomisasi halaman login
+    -   Mengubah struktur halaman login. Berikut merupakan struktur HTML pada bagian `<body>` halaman login.
+        ```html
+        {% block content %}
+        <section class="form-wrapper">
+            <h1 class="form-header">Login</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" autocomplete="username" required autofocus>
+                </div>
+                <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" autocomplete="password" required>
+                </div>
+                <div class="submit-wrapper">
+                <input type="submit" value="LOGIN" class="btn-primary" />
+                </div>
+            </form>
+            <p class="form-footer">New to Aci Rezeki Shop? <a href="/register/">Create an account</a></p>
+        </section>
+        {% endblock content %}
+        ```
+    -   Mengubah style halaman login. Karena _style_ untuk form sudah diimplementasi pada `form.css`, maka kita cukup import _style_ dari `form.css` ke `login.css`. Berikut merupakan kodenya.
+        ```css
+            @import "form.css";
+        ```
+    -   Berikut merupakan tampilan halaman login setelah diimplementasi _style_.
+        ![Registration Page](img/login-page.png)
+
+-   Kustomisasi halaman register
+    -   Mengubah struktur halaman register sesuai dengan yang diinginkan. Berikut merupakan struktur HTML pada bagian `<body>` halaman register.
+        ```html
+        {% block content %}
+        <section class="form-wrapper">
+        <h1 class="form-header">Register</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <div class="submit-wrapper">
+            <input type="submit" value="REGISTER" class="btn-primary" />
+            </div>
+        </form>
+        <p class="form-footer">Already have an account? <a href="/login/">Login</a></p>
+        </section>
+        {% endblock content %}
+        ```
+    -   Mengubah style halaman register. Karena _style_ untuk form sudah diimplementasi pada `form.css`, maka kita cukup import _style_ dari `form.css` ke `register.css`. Berikut merupakan kodenya.
+        ```css
+            @import "form.css";
+        ```
+    -   Berikut merupakan tampilan halaman register setelah diimplementasi _style_.
+        ![Registration Page](img/register-page.png)
+
+-   Kustomisasi halaman _create item_
+    -   Mengubah struktur halaman _create item_ sesuai dengan yang diinginkan. Berikut merupakan struktur HTML pada bagian `<body>` halaman register.
+        ```html
+            {% block content %}
+            <section class="form-wrapper">
+            <h1 class="form-header">Add New Item</h1>
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_div }}
+                <div class="submit-wrapper">
+                <input type="submit" value="SUBMIT" class="btn-primary" />
+                </div>
+            </form>
+            </section>
+            {% endblock content %}
+        ```
+    -   Mengubah style halaman _create item_. Karena _style_ untuk form sudah diimplementasi pada `form.css`, maka kita cukup import _style_ dari `form.css` ke `create_item.css`. Berikut merupakan kodenya.
+        ```css
+            @import "form.css";
+        ```
+    -   Berikut merupakan tampilan halaman _create item_ setelah diimplementasi _style_.
+        ![Create Item](img/create-item-page.png)
+
+-   Kustomisasi halaman `index.html` (daftar inventori) dengan pendekatan penggunaan _Card_
+    -  Membuat komponen _Card_ untuk menampilkan item dari inventori. Berikut kodenya.
+        ```html
+            <div class="item-card-wrapper">
+                {% for item in items %}
+                    <a href="/item/{{item.id}}" class="item-card shadow">
+                        <img src="{{item.image}}" class="item-image"></img>
+                        <div class="item-contents">
+                            <p class="item-name">{{item.name}}</p>
+                            <p class="item-description">{{item.description}}</p>
+                            <div class="item-field">
+                                <span>Price</span>
+                                <span>Rp{{item.price|intcomma}}</span>
+                            </div>
+                            <div class="item-field">
+                                <span>Stock</span>
+                                <span>{{item.amount}}</span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        ```
+        Penjelasan:
+        Card tersebut merupakan elemen `<a>` yang apabila diklik akan mengarahkan user ke _path url_ detail item tersebut. Card tersebut terdiri dari beberapa komponen, yaitu gambar dan kontennya. Bagian konten berisi data nama, deskripsi singkat, harga, dan stok (amount) dari item inventori.
+    -   Membuat _style_ untuk _Card_ tersebut di dalam file `index.css`. Berikut merupakan kodenya
+        ```css
+            #add-item-wrapper {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .item-card-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .item-card {
+                display: block;
+                width: 300px;
+                height: fit-content;
+                overflow: clip;
+                border-radius: 1.5rem;
+            }
+
+            .item-image {
+                display: inline-block;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                aspect-ratio: 3 / 2;
+            }
+
+            .item-contents {
+                padding: 1rem;
+            }
+
+            .item-name {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: var(--primary-color);
+            }
+
+            .item-description {
+                height: 36px;
+                margin: 8px 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+            .item-field {
+                display: flex;
+                justify-content: space-between;
+                color: black;
+            }
+        ```
+    
+    -   Berikut merupakan hasil tampilan halaman `index.html` setelah diimplementasi _Card_.
+        ![Homepage](img/homepage.png)
+
+<!-- ================ TUGAS 5 END ================== -->
+
+<!-- ================ TUGAS 4 BEGIN ================== -->
+<details>
+<summary><h1 id="tugas-4">Tugas 4</h1></summary>
 
 ## `UserCreationForm` Django
 
@@ -267,7 +617,7 @@ Namun, penggunaan _cookies_ memiliki beberapa risiko yang mesti diwaspadai. Jika
 
 <!-- ================ TUGAS 3 BEGIN ================== -->
 <details>
-<summary><h1>Tugas 3</h1></summary>
+<summary><h1 id="tugas-3">Tugas 3</h1></summary>
 
 ## Perbedaan Form POST dan Form GET
 
@@ -429,7 +779,7 @@ Menambahkan pesan "Jumlah item tersedia: X" (dengan X adalah jumlah data item ya
 
 <!-- ================ TUGAS 2 BEGIN ================== -->
 <details>
-<summary><h1>Tugas 2</h1></summary>
+<summary><h1 id="tugas-2">Tugas 2</h1></summary>
 
 ## Implementasi Step-by-Step (Tugas 2)
 

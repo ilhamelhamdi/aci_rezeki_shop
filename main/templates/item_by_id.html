@@ -5,7 +5,7 @@
 {% block title %}Item{% endblock title %}
 
 {% block meta %}
-<link rel="stylesheet" href="{% static 'item_by_id.css' %}">
+<link rel="stylesheet" href="{% static 'css/item_by_id.css' %}">
 {% endblock meta %}
 
 {% block content %}
@@ -19,7 +19,11 @@
     <span class="item-price">Rp{{item.price|intcomma}}</span>
     <div class="item-meta">
       <span>Category: {{item.category}}</span>
-      <span>Stock: <span style="font-weight: bold;">{{item.amount}}</span></span>
+      <span>Stock: 
+        <button id="decrement_stock">-</button>
+        <span style="font-weight: bold;">{{item.amount}}</span>
+        <button id="increment_stock">+</button>
+      </span>
     </div>
     <div class="item-description">
       <h2>Description</h2>
