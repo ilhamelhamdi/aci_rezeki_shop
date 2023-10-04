@@ -14,6 +14,7 @@ body {
 }
 
 header {
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -22,7 +23,7 @@ header {
     padding: 0 2rem;
     position: fixed;
     width: 100%;
-    border-bottom: 1px solid #F0F3F7;
+    border-bottom: 1px solid #f0f3f7;
 }
 
 header nav {

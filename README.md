@@ -10,6 +10,7 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
     -   [Perbedaan Margin dan Padding](#perbedaan-margin-dan-padding)
     -   [Perbedaan dan _Use Case_ Penggunaan _Framework_ CSS Bootstrap dan Tailwind](#perbedaan-dan-use-case-penggunaan-framework-css-bootstrap-dan-tailwind)
     -   [Implementasi Step-by-Step](#implementasi-step-by-step-tugas-5)
+    -   [Bonus](#bonus-tugas-5)
 -   [Tugas 4](#tugas-4)
     -   [UserCreationForm Django](#usercreationform-django)
     -   [Perbedaan Autentikasi dan Otorisasi](#perbedaan-autentikasi-dan-otorisasi)
@@ -366,6 +367,20 @@ _Framework_ Bootstrap lebih baik digunakan untuk membuat website yang memiliki *
     -   Berikut merupakan hasil tampilan halaman `index.html` setelah diimplementasi _Card_.
         ![Homepage](img/homepage.png)
 
+## Bonus Tugas 5
+Memberikan warna yang berbeda (teks) pada item terakhir dari item pada inventori menggunakan CSS
+
+- Kode CSS
+  
+    ```css
+    .item-card:last-child span {
+        color: red;
+    }
+    ```
+- Tampilan Bonus
+  
+    ![Bonus Assignment 3](img/bonus-assignment-5.png)
+  
 <!-- ================ TUGAS 5 END ================== -->
 
 <!-- ================ TUGAS 4 BEGIN ================== -->

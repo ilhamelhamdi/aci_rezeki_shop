@@ -58,3 +58,7 @@
     justify-content: space-between;
     color: black;
 }
+
+.item-card:last-child span {
+    color: red;
+}
