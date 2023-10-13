@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotAllowed
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse, HttpResponseServerError, HttpResponseForbidden
 from django.urls import reverse
 from main.models import Category, Item
 from main.forms import ItemForm, CategoryForm
@@ -14,12 +14,10 @@ import datetime
 
 @login_required(login_url='main:login')
 def show_homepage(request):
-    items = Item.objects.filter(user=request.user)
-    count = Item.objects.filter(user=request.user).count()    # Jumlah item
+    form = ItemForm()
     context = {
-        'items': items,
-        'item_count': count,
         'last_login': request.COOKIES.get('last_login'),
+        'form': form,
     }
     return render(request, "index.html", context)
 
@@ -43,6 +41,21 @@ def create_item(request):
 
     context = {'form': form}
     return render(request, 'create_item.html', context)
+
+@login_required(login_url='main:login')
+def create_item_ajax(request):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    try:
+        form = ItemForm(request.POST or None)
+        if form.is_valid():
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+            return HttpResponse('Item has been created', status=201)
+        return HttpResponseBadRequest('Invalid data')
+    except:
+        return HttpResponseServerError()
 
 @login_required(login_url='main:login')
 def update_item(request, id):
@@ -76,34 +89,32 @@ def delete_item(request, id):
         return HttpResponseNotAllowed(['DELETE'])
     item = Item.objects.get(id=id)
     if item.user != request.user:
-        messages.error(request, 'You are not authorized to delete this item!')
-        return redirect('main:show_homepage')
+        return HttpResponseForbidden('Unauthorized')
     item.delete()
-    messages.success(request, 'Item has been deleted!')
-    return redirect('main:show_homepage')
+    return HttpResponse('Deleted')
 
 @login_required(login_url='main:login')
-def show_json(request):
+def get_items_json(request):
     data = Item.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('json', data), content_type="application/json")
 
 @login_required(login_url='main:login')
-def show_xml(request):
+def get_items_xml(request):
     data = Item.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize('xml', data), content_type="application/xml")
 
 @login_required(login_url='main:login')
-def show_json_by_id(request, id):
+def get_item_by_id_json(request, id):
     data = Item.objects.filter(user=request.user, id=id)
     return HttpResponse(serializers.serialize('json', data), content_type="application/json")
 
 @login_required(login_url='main:login')
-def show_xml_by_id(request, id):
+def get_item_by_id_xml(request, id):
     data = Item.objects.filter(user=request.user, id=id)
     return HttpResponse(serializers.serialize('xml', data), content_type="application/xml")
 
 @login_required(login_url='main:login')
-def show_html_by_id(request, id):
+def show_item_detail(request, id):
     data = Item.objects.filter(user=request.user, id=id)
     context = {
         'data': data,
