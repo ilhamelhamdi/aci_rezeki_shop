@@ -1,6 +1,6 @@
 import { getCookie } from "./utils.js"
 
-const BASE_URL = 'http://localhost:8000/'
+const BASE_URL = (new URL(window.location.href)).origin
 const FETCH_HEADERS = {
   "X-CSRFToken": getCookie('csrftoken'),
 }
