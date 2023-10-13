@@ -29,4 +29,4 @@ RUN chown -R django:django /app
 USER django
 
 # Run application
-CMD gunicorn aci_rezeki_shop.wsgi:application
+# CMD gunicorn aci_rezeki_shop.wsgi:application
