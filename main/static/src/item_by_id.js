@@ -1,10 +1,12 @@
 import { BASE_URL, FETCH_HEADERS } from './config.js'
 
+const path = window.location.pathname.split('/')
+const id = path[path.length - 2]
+
 const getItemById = async () => {
-  const path = window.location.pathname.split('/')
-  const id = path[path.length - 1]
-  let item = await fetch(`${BASE_URL}/json/${id}`, { headers: FETCH_HEADERS })
+  let item = await fetch(`${BASE_URL}/json/${id}/`, { headers: FETCH_HEADERS })
   item = await item.json()
+  item = item[0]
   let itemHTML = `
       <div class="image-wrapper">
         <img src="${item.fields.image}" alt="">
@@ -24,16 +26,21 @@ const getItemById = async () => {
           <h2>Description</h2>
           <p>${item.fields.description}</p>
         </div>
-        <button class="btn btn-danger" onclick="() => {deleteItem(${item.fields.pk})}">Delete</button>
+        <button class="btn btn-danger" id="delete-button">Delete</button>
       </div>
     `
   document.getElementById('content-wrapper').innerHTML = itemHTML
+
+  document.getElementById('delete-button').addEventListener('click', deleteItem)
 }
 
-const deleteItem = (id) => {
-  fetch(`${BASE_URL}/delete-item/${id}/`, {
+const deleteItem = async () => {
+  const response = await fetch(`${BASE_URL}/delete-item/${id}/`, {
     method: 'DELETE',
     headers: FETCH_HEADERS
   })
+  console.log(response);
   window.location.href = '/'
 }
+
+getItemById()

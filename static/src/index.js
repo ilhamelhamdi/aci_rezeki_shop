@@ -43,6 +43,7 @@ const addItem = async () => {
 
 fetchItems()
 
+
 document.getElementById('add-item-form').addEventListener('submit', e => {
   e.preventDefault()
   addItem()
