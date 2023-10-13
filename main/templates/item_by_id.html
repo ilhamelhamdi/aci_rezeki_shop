@@ -10,26 +10,12 @@
 
 {% block content %}
 {% for item in data%}
-<div class="content-wrapper">
-  <div class="image-wrapper">
-    <img src="{{item.image}}" alt="">
-  </div>
-  <div class="text-wrapper">
-    <h1 class="item-name">{{item.name}}</h1>
-    <span class="item-price">Rp{{item.price|intcomma}}</span>
-    <div class="item-meta">
-      <span>Category: {{item.category}}</span>
-      <span>Stock: 
-        <button id="decrement_stock">-</button>
-        <span style="font-weight: bold;">{{item.amount}}</span>
-        <button id="increment_stock">+</button>
-      </span>
-    </div>
-    <div class="item-description">
-      <h2>Description</h2>
-      <p>{{item.description}}</p>
-    </div>
-  </div>
+<div class="content-wrapper" id="content-wrapper">
+  Loading...
 </div>
 {% endfor %}
 {% endblock content %}
+
+{{% block script %}
+<script src="{% static 'src/item_by_id.js' %}" type="module"></script>
+{% endblock script%}}

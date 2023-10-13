@@ -30,8 +30,310 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
     -   [Alasan Penggunaan Virtual Environment](#alasan-penggunaan-virtual-environment)
     -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
 
+<!-- ================ TUGAS 6 BEGIN ================== -->
+<details>
+<summary><h1 id="tugas-6">Tugas 6</h1></summary>
+
+## Perbedaan _Asynchronous Programming_ dan _Synchronous Programming_
+1. Alur eksekusi program
+   - _Synchronous_ : Eksekusi program dilakukan secara berurutan, satu per satu. Eksekusi program akan berhenti pada saat menunggu suatu proses selesai dilakukan.
+   - _Asynchronous_ : Eksekusi program dilakukan secara bersamaan. Eksekusi program tidak akan berhenti pada saat menunggu suatu proses selesai dilakukan.
+2. _Blocking_ dan _non-blocking_
+   -  _Synchronous_: Eksekusi program dari _Synchronous programming_ bersifat _blocking_. Artinya, saat suatu fungsi atau proses dipanggil, program akan menunggu hingga proses sebelumnya selesai. 
+   -  _Asynchronous_: Eksekusi program dari _Asynchronous programming_ bersifat _non-blocking_. Artinya, eksekusi program tidak akan berhenti untuk menunggu suatu proses lainnya selesai dilakukan.
+3. Responsifitas
+   - _Synchronous_ : Kode yang dijalankan secara _synchronous_, biasanya kurang responsif. Hal ini terjadi apabila program yang dijalankan membutuhkan waktu yang lama untuk menyelesaikan suatu proses. Selama proses tersebut berjalan, user tidak dapat berinteraksi dengan program, seperti melakukan input dan lainnya.
+   - _Asynchronous_: Kode yang dijalankan secara _asynchronous_ memiliki responsifitas yang tinggi karena sifatnya yang non-blocking. Hal ini terjadi karena program tidak akan berhenti untuk menunggu suatu proses selesai dilakukan. Selama proses tersebut berjalan, user masih dapat berinteraksi dengan program. _Task_ yang waktu eksekusinya lama dapat dijalankan di _background_ sehingga tidak mengganggu interaksi user dengan program.
+4. Contoh kasus penggunaan
+   - _Synchronous_ : Program yang membutuhkan waktu eksekusi singkat atau program yang urutan pengeksekusiannya penting, seperti _training_ model pada _machine learning_ dan eksekusi operasi matematika yang kompleks.
+   - _Asynchronous_: Tugas yang membutuhkan waktu eksekusi lama atau berpotensi melakukan _blocking_, seperti _fetching data_ dari _database_, _fetching data_ dari _API_, dan _file I/O_.
+5. Implementasi pemrograman
+   -  _Synchronous_ : Dilakukan secara linear, satu per satu.
+   -  _Asynchronous_: Menggunakan mekanisme _callback_, _promise_, atau _asycn/await_.
+
+
+## Paradigma _Event-Driven Programming_
+_Event-driven programming_ adalah sebuah paradigma pemrograman yang alur eksekusi programnya ditentukan oleh _event_, seperti masukan user dari keyboard, mouse, _touchpad_, atau touchscreen; _signal_ dari _hardware_; atau _message_ dari program lain. _Event_ tersebut akan memicu suatu _handler_ yang akan menangani _event_ tersebut. _Event-driven programming_ biasanya digunakan untuk membuat program yang bersifat _responsive_ dan _interactive_. 
+
+Paradigma _event-driven programming_ juga diterapkan di proyek ini. Salah satu contoh penerapannya adalah pada _event handler_ untuk form "Add Item" pada halaman `index.html`. _Event_ yang digunakan pada contoh tersebut adalah _submit_. Ketika user menekan tombol "Submit", _event handler_ akan menangani _event_ tersebut dengan mengirimkan data yang diinputkan oleh user ke _server_ menggunakan _AJAX_. Setelah data berhasil dikirim, _event handler_ akan menampilkan _alert_ yang memberitahukan bahwa data berhasil ditambahkan. 
+
+Berikut merupakan kode untuk menambahkan/melakukan _binding_ _event_ pada form "Add Item".
+
+```js
+document.getElementById('add-item-form').addEventListener('submit', e => {
+  e.preventDefault()
+  addItem() // pemanggilan event handler
+})
+```
+
+Berikut merupakan kode _event handler_ untuk menangani _event_ tersebut.
+
+```js
+const addItem = async () => {
+  const form = document.getElementById('add-item-form')
+  let response = await fetch(`${BASE_URL}/create-ajax/`, {
+    method: 'POST',
+    headers: FETCH_HEADERS,
+    body: new FormData(form)
+  })
+  if (response.status == 201) {
+    document.getElementById('add-item-form').reset()
+    fetchItems()
+    $('#add-item-modal').modal('hide')
+  }
+}
+```
+
+## Penerapan _Asynchronous Programming_ pada AJAX
+Seperti yang telah dijelaskan sebelumnya, _asynchronous programming_ memungkinkan kita untuk menjalankan beberapa program secara bersamaan atau paralel. Karena hal tersebut, implementasi _asynchronous programming_ sedikit berbeda dengan _synchronous programming_ yang bersifat linear. Untuk menerapkan _asynchronous programming_ pada AJAX, kita perlu memahami beberapa konsep, seperti _callback_, _promise_, dan _async/await_.
+
+1. _Callback_
+   
+_Callback_ adalah sebuah fungsi yang di-_passing_ sebagai argumen ke fungsi lainnya. Tujuan dari penggunaan _callback_ adalah untuk menentukan apa yang akan dilakukan setelah suatu tugas tertentu selesai atau gagal dijalankan. Dalam AJAX, _callback_ digunakan untuk menentukan apa yang akan dilakukan setelah suatu _request_ selesai dilakukan. Salah satu contoh _built-in API_ untuk melakukan transfer data AJAX yang menggunakan konsep _callback_ adalah XHR (XMLHttpRequest). Berikut merupakan contoh kode untuk melakukan _request_ menggunakan XHR.
+
+```js
+function fetchData(callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'http://localhost:8000/json/', true);
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var response = xhr.responseText;
+      callback(response); // Panggil callback dengan data response
+    }
+  };
+
+  xhr.send();
+}
+
+// Menggunakan callback
+fetchData(function(data) {
+  // Melakukan sesuatu dengan data response
+});
+```
+
+Namun penerapan _callback_ biasanya cukup merepotkan ketika jumlah fungsi callback menjadi banyak dan perlu dijalankan secara berurutan. Hal ini disebut dengan _callback hell_. _Callback hell_ tidak menyebabkan kesalahan program atau output, tetapi hanya akan menyulitkan kita dalam membaca kode program. Berikut merupakan contoh kode _callback hell_.
+
+```js
+getUser(function(user) {
+    getOrders(user.id, function(orders) {
+        getOrderDetails(orders[0].id, function(orderDetails) {
+            showOrderDetails(orderDetails);
+        });
+    });
+});
+```
+
+2. _Promise_
+Seperti namanya, _promise_ adalah janji. Dalam Javascript, _promise_ dapat dikatakan sebagai janji dari suatu fungsi untuk mengembalikan nilai. Konsep _promise_ dibuat untuk menghindari kasus _callback hell_ pada implementasi _asynchronous programming_ dengan menggunakan _callback_. _Promise_ dapat memiliki tiga kondisi, yaitu _pending_, _fulfilled_, dan _rejected_. _Promise_ akan berada dalam kondisi _pending_ ketika fungsi sedang berjalan. _Promise_ akan berada dalam kondisi _fulfilled_ atau _resolved_ ketika fungsi yang mengembalikan _promise_ berhasil dijalankan. Sedangkan _promise_ akan berada dalam kondisi _rejected_ ketika fungsi yang mengembalikan _promise_ gagal dijalankan. Berikut merupakan contoh kode untuk membuat _promise_.
+
+Untuk menangani objek _promise_, kita dapat menggunakan dua method, yaitu `then()` dan `catch()`. Method `then()` digunakan untuk menangani _promise_ yang berhasil dijalankan, sedangkan method `catch()` digunakan untuk menangani _promise_ yang gagal dijalankan. Salah satu contoh _built-in API_ untuk melakukan transfer data AJAX yang menggunakan konsep _promise_ adalah fungsi `fetch()`. Berikut merupakan implementasi AJAX dengan `fetch`.
+
+```js
+fetch('http://localhost:8000/json/')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    // Manipulasi data response di sini
+  })
+  .then(function() {
+    // Melakukan sesuatu setelah data berhasil dimanipulasi
+  })
+  .catch(function(error) {
+    // Tangani kesalahan jika terjadi
+  });
+```
+
+3. _Async/await_
+_Async/await_ adalah salah satu fitur baru dari Javascript yang di gunakan untuk menangani hasil dari sebuah promise. Caranya adalah dengan menambahkan kata `async` di depan sebuah fungsi untuk mengubahnya menjadi _asynchronous_.
+Sedangkan `await` berfungsi untuk menunda sebuah kode di jalankan, sampai proses _asynchronous_ berhasil. Dengan menggunakan cara ini, kode program akan terlihat lebih mudah dibaca karena pendekatan ini secara sintaks mirip dengan pendekatan _synchronous programming_. Jika pada implementasi _promise_ secara _native_, kesalahan/error ditangani dengan method `catch`, pada _async/await_ kita cukup menanganinya dengan blok `try` dan `catch`. Contoh berikut merupakan implementasi AJAX dengan menggunakan `fetch()` dan _async/await_.
+
+```js
+async function getItems(){
+    try {
+        const response = await fetch('http://localhost:8000/json/')
+        let data = await response.json()
+        data = await doingManipulation(data)
+        data = await afterManipulation(data)
+    } catch (error) {
+        // Tangani kesalahan jika terjadi
+    }
+}
+```
+
+## Perbedaan `Fetch API` dan _library_ `jQuery` dalam Penerapan AJAX
+|Key        | Fetch     | jQuery    |
+| --------- | --------- | --------- |
+| Native vs Library | _Native API_ untuk melakukan _request_ AJAX | _Library_ untuk melakukan _request_ AJAX |
+| Syntax    | Menggunakan _promise_ untuk menangani _request_ | Menggunakan _callback_ untuk menangani _request_ |
+| Complexity | Lebih _low-level_ & memberikan _full control_ untuk membuat _request_ | Lebih _high-level_ & menyediakan _built-in function_ untuk membuat _request_ |
+| Size | Lebih ringan karena merupakan _native API_ | Lebih berat karena merupakan _library_ |
+
+## Implementasi Step-by-Step (Tugas 6)
+- Membuat file `config.js` sebagai file konfigurasi untuk melakukan `fetch` ke API
+  ```js
+  import { getCookie } from "./utils.js"
+
+    const BASE_URL = 'http://localhost:8000/'
+    const FETCH_HEADERS = {
+    "X-CSRFToken": getCookie('csrftoken'),
+    }
+
+    export { BASE_URL, FETCH_HEADERS }
+  ```
+### AJAX GET
+- Mengubah kode _cards_ data item untuk mendukung AJAX GET
+    - Menambahkan file `index.js` pada folder `static/src`
+    - Membuat fungsi `fetchItems` untuk melakukan fetch data _cards item_ dengan `fetch()`
+      ```js
+      import { BASE_URL, FETCH_HEADERS } from './config.js'
+
+      const fetchItems = async () => {
+      let items = await fetch(`${BASE_URL}/json/`, { headers: FETCH_HEADERS })
+      items = await items.json()
+      let itemsHTML = ''
+      items.forEach(item => {
+          itemsHTML += `
+          <a href="/item/${item.pk}" class="item-card shadow">
+          <img src="${item.fields.image}" class="item-image"></img>
+          <div class="item-contents">
+              <p class="item-name">${item.fields.name}</p>
+              <p class="item-description">${item.fields.description}</p>
+              <div class="item-field">
+              <span>Price</span>
+              <span>Rp${item.fields.price}</span>
+              </div>
+              <div class="item-field">
+              <span>Stock</span>
+              <span>${item.fields.amount}</span>
+              </div>
+          </div>
+          </a>
+          `
+      })
+      document.getElementById('item-card-wrapper').innerHTML = itemsHTML
+      document.getElementById('item-count').innerHTML = items.length
+      }
+
+      fetchItems()
+      ```
+    - Menghubungkan file javascript `index.js` dengan template `index.html` dengan menambahkan kode berikut di bagian akhir `<body>` template.
+      ```html
+      <script src="{% static 'src/index.js' %}" type="module"></script>
+      ```
+    - Mengubah template `index.html` dengan mengganti kode _cards item_ sebelumnya dengan text "Loading..."
+        ```html
+        <div class="item-card-wrapper" id="item-card-wrapper">
+        Loading...
+        </div>
+        ```
+
+### AJAX POST
+- Membuat tombol untuk membuka modal untuk menambahkan item dengan menambahkan kode berikut pada file template `index.html`
+    ```html
+    <!-- Tombol Menampilkan Modal -->
+    <div id="add-item-wrapper">
+        <p>Jumlah item tersedia: <span id="item-count" style="font-weight: bolder;">N/A</span></p>
+        <button data-toggle="modal" data-target="#add-item-modal" class="btn-primary">+ ADD ITEM</button>
+    </div>
+
+    ...
+
+    <!-- Modal -->
+    <div class="modal" id="add-item-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Item</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="add-item-form">
+                {% csrf_token %}
+                {{ form.as_div }}
+                <div class="submit-wrapper">
+                    <input type="submit" value="SUBMIT" class="btn-primary" id="add-item-btn" />
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    ```
+- Membuat fungsi view baru untuk menambahkan item baru ke dalam basis data
+  ```py
+    @login_required(login_url='main:login')
+    def create_item_ajax(request):
+        if request.method != "POST":
+            return HttpResponseNotAllowed(["POST"])
+        try:
+            form = ItemForm(request.POST or None)
+            if form.is_valid():
+                item = form.save(commit=False)
+                item.user = request.user
+                item.save()
+                return HttpResponse('Item has been created', status=201)
+            return HttpResponseBadRequest('Invalid data')
+        except:
+            return HttpResponseServerError()
+  ```
+- Menambahkan _path_ `/create-ajax/` yang mengarah ke fungsi view `create_item_ajax` di berkas `urls.py` pada folder main.
+  ```py
+  urlpatterns = [
+    ...
+    path('create-ajax/', create_item_ajax, name='create_item_ajax'),
+    ...
+  ]
+  ```
+- Menghubungkan form  di dalam modal ke _path_ `/create-ajax/`.
+  - Menambahkan fungsi `addItem` sebagai _event handler_ pada file `index.js`
+    ```js
+    const addItem = async () => {
+        const form = document.getElementById('add-item-form')
+        let response = await fetch(`${BASE_URL}/create-ajax/`, {
+            method: 'POST',
+            headers: FETCH_HEADERS,
+            body: new FormData(form)
+        })
+        if (response.status == 201) {
+            document.getElementById('add-item-form').reset()
+            $('#add-item-modal').modal('hide')
+        }
+    }
+    ```
+  - Menambahkan _event listener_ pada saat `submit` untuk form  pada file `index.js`
+    ```js
+    document.getElementById('add-item-form').addEventListener('submit', e => {
+        e.preventDefault()
+        addItem()
+    })
+    ```
+- Melakukan _refresh_ pada halaman utama secara _asinkronus_ untuk menampilkan daftar item terbaru tanpa _reload_ halaman utama secara keseluruhan.
+  - Menambahkan pemanggilan fungsi `fetchItems` kembali pada saat berhasil menambahkan item baru pada file `index.js`
+    ```js
+    const addItem = async () => {
+        ...
+        if (response.status == 201) {
+            document.getElementById('add-item-form').reset()
+            fetchItems() // pemanggilan fungsi fetchItems
+            $('#add-item-modal').modal('hide')
+        }
+    }
+    ```
+
+### Collect Static
+Pada Terminal atau CMD, setelah menjalankan _virtual environment_, jalankan perintah `python manage.py collecstatic`
+
+
+</details>
+<!-- ================ TUGAS 6 END ================== -->
+
+
 <!-- ================ TUGAS 5 BEGIN ================== -->
-<details open>
+<details>
 <summary><h1 id="tugas-5">Tugas 5</h1></summary>
 
 ## Manfaat dan Penggunaan yang Tepat dari _Element Selector_

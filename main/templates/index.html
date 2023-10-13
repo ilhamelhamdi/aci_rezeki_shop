@@ -3,33 +3,42 @@
 {% load static %}
 
 {% block meta %}
-<link rel="stylesheet" href="{%static 'css/index.css'%}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock meta %}
 
 {% block content %}
 <div id="add-item-wrapper">
-  <p>Jumlah item tersedia: <span style="font-weight: bolder;">{{item_count}}</span></p>
-  <a href="/create-item" class="btn-primary">+ ADD ITEM</a>
+  <p>Jumlah item tersedia: <span id="item-count" style="font-weight: bolder;">N/A</span></p>
+  <button data-toggle="modal" data-target="#add-item-modal" class="btn-primary">+ ADD ITEM</button>
 </div>
 
-<div class="item-card-wrapper">
-  {% for item in items %}
-  <a href="/item/{{item.id}}" class="item-card shadow">
-    <img src="{{item.image}}" class="item-image"></img>
-    <div class="item-contents">
-      <p class="item-name">{{item.name}}</p>
-      <p class="item-description">{{item.description}}</p>
-      <div class="item-field">
-        <span>Price</span>
-        <span>Rp{{item.price|intcomma}}</span>
+<div class="item-card-wrapper" id="item-card-wrapper">
+  Loading...
+</div>
+
+<div class="modal" id="add-item-modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Item</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="item-field">
-        <span>Stock</span>
-        <span>{{item.amount}}</span>
+      <div class="modal-body">
+        <form method="POST" id="add-item-form">
+          {% csrf_token %}
+          {{ form.as_div }}
+          <div class="submit-wrapper">
+            <input type="submit" value="SUBMIT" class="btn-primary" id="add-item-btn" />
+          </div>
+        </form>
       </div>
     </div>
-  </a>
-  {% endfor %}
+  </div>
 </div>
-
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'src/index.js' %}" type="module"></script>
+{% endblock script%}
