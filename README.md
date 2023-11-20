@@ -31,7 +31,7 @@ Web application : [https://aci-rezeki-shop.ilhamelhamdi.com](https://aci-rezeki-
     -   [Konsep MVC, MVT, dan MVVM](#konsep-mvc-mvt-dan-mvvm)
 
 <!-- ================ TUGAS 6 BEGIN ================== -->
-<details>
+<details open>
 <summary><h1 id="tugas-6">Tugas 6</h1></summary>
 
 ## Perbedaan _Asynchronous Programming_ dan _Synchronous Programming_
@@ -333,7 +333,7 @@ Pada Terminal atau CMD, setelah menjalankan _virtual environment_, jalankan peri
 
 
 <!-- ================ TUGAS 5 BEGIN ================== -->
-<details>
+<details open>
 <summary><h1 id="tugas-5">Tugas 5</h1></summary>
 
 ## Manfaat dan Penggunaan yang Tepat dari _Element Selector_
@@ -683,6 +683,7 @@ Memberikan warna yang berbeda (teks) pada item terakhir dari item pada inventori
   
     ![Bonus Assignment 3](img/bonus-assignment-5.png)
   
+</details>
 <!-- ================ TUGAS 5 END ================== -->
 
 <!-- ================ TUGAS 4 BEGIN ================== -->
