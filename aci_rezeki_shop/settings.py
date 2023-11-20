@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import environ 
-import os 
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +25,15 @@ env = environ.Env()
 SECRET_KEY = 'django-insecure-ec8i25o4@#e$4)d%4r@*7dezr3hjnd43u!7_!mxou53y#oy6^='
 PRODUCTION = env.bool('PRODUCTION', False)
 
+if PRODUCTION:
+    environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+else:
+    environ.Env.read_env(os.path.join(BASE_DIR, '.env.development.local'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -81,17 +84,26 @@ WSGI_APPLICATION = 'aci_rezeki_shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DATABASE'),
+        'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASSWORD'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
     }
 }
 
 # Set database settings automatically using DATABASE_URL.
 if PRODUCTION:
     DATABASES = {
-        'default': env.db('DATABASE_URL')
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('POSTGRES_DATABASE'),
+            'USER': env('POSTGRES_USER'),
+            'PASSWORD': env('POSTGRES_PASSWORD'),
+            'HOST': env('POSTGRES_HOST'),
+        }
     }
-    DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 # Password validation
