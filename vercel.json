@@ -20,5 +20,5 @@
             "dest": "aci_rezeki_shop/wsgi.py"
         }
     ],
-    "outputDirectory": "static"
+    "outputDirectory": "static" 
 }
