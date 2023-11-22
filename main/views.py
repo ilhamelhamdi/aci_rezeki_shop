@@ -218,6 +218,8 @@ def logout(request):
 @csrf_exempt
 def register(request):
     username = request.POST.get('username')
+    password1 = request.POST.get('password1')
+    password2 = request.POST.get('password2')
     # check if username already exists
     form = UserCreationForm()
     form = UserCreationForm(request.POST)
@@ -229,8 +231,7 @@ def register(request):
             "message": "Registeration is succesful!"
         }, status=201)
     else:
-        error_message = list(form.error_messages.values())[0]
-        print(error_message)
+        error_message = list(form.errors.values())[0][0]
         return JsonResponse({
             "status": False,
             "message": error_message
