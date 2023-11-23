@@ -29,7 +29,7 @@ const fetchItems = async () => {
 
 const addItem = async () => {
   const form = document.getElementById('add-item-form')
-  let response = await fetch(`${BASE_URL}/create-ajax/`, {
+  let response = await fetch(`${BASE_URL}/create-item/`, {
     method: 'POST',
     headers: FETCH_HEADERS,
     body: new FormData(form)
