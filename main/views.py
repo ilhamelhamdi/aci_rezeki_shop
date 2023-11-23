@@ -35,32 +35,20 @@ def show_about(request):
 @login_required(login_url='main:login')
 def create_item(request):
     form = ItemForm(request.POST or None)
-
-    # When client hit submit -> Post
-    if form.is_valid() and request.method == "POST":
-        item = form.save(commit=False)
-        item.user = request.user
-        item.save()
-        return HttpResponseRedirect('/')
-
-    context = {'form': form}
-    return render(request, 'create_item.html', context)
-
-
-@login_required(login_url='main:login')
-def create_item_ajax(request):
-    if request.method != "POST":
-        return HttpResponseNotAllowed(["POST"])
-    try:
-        form = ItemForm(request.POST or None)
-        if form.is_valid():
-            item = form.save(commit=False)
-            item.user = request.user
-            item.save()
-            return HttpResponse('Item has been created', status=201)
-        return HttpResponseBadRequest('Invalid data')
-    except:
-        return HttpResponseServerError()
+    if request.method == "GET":
+        context = {'form': form}
+        return render(request, 'create_item.html', context)
+    if request.method == "POST":
+        try:
+            form = ItemForm(request.POST or None)
+            if form.is_valid():
+                item = form.save(commit=False)
+                item.user = request.user
+                item.save()
+                return JsonResponse({'status': 'success', 'message': 'Item has been created'}, status=201)
+            return JsonResponse({'status': 'failed', 'message': 'Invalid data'}, status=400)
+        except:
+            return JsonResponse({'status': 'failed', 'message': 'Server Error'}, status=500)
 
 
 @login_required(login_url='main:login')
@@ -215,6 +203,7 @@ def logout(request):
             "message": "Failed to logout."
         }, status=401)
 
+
 @csrf_exempt
 def register(request):
     username = request.POST.get('username')
@@ -236,20 +225,21 @@ def register(request):
             "status": False,
             "message": error_message
         }, status=401)
-    
+
+
 @csrf_exempt
 def create_product_flutter(request):
     if request.method == 'POST':
-        
+
         data = json.loads(request.body)
 
         new_product = Item.objects.create(
-            user = request.user,
-            name = data["name"],
-            price = int(data["price"]),
-            description = data["description"],
-            amount = int(data["amount"]),
-            image = data["image"],
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"],
+            amount=int(data["amount"]),
+            image=data["image"],
         )
 
         new_product.save()

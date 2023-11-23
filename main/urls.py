@@ -8,7 +8,6 @@ urlpatterns = [
     path('', views.show_homepage, name='show_homepage'),
     path('about/', views.show_about, name='show_about'),
     path('create-item/', views.create_item, name='create_item'),
-    path('create-ajax/', views.create_item_ajax, name='create_item_ajax'),
     path('json/', views.get_items_json, name='get_items_json'),
     path('xml/', views.get_items_xml, name='get_items_xml'),
     path('json/<int:id>/', views.get_item_by_id_json, name='get_item_by_id_json'),
